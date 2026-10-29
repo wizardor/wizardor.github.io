@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy | PMS - Evidentiary Dossier & Document Formatting Workbench</title>
+  <title>Privacy Policy | PMS - Cloud Evidentiary Dossier & Document Platform</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex flex-col min-h-screen">
@@ -35,56 +35,52 @@
 
     <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-xs space-y-6 text-sm leading-relaxed text-slate-700">
       <section class="space-y-3">
-        <h2 class="text-lg font-bold text-slate-900">1. Zero-Touch Payment Security (PCI-DSS Compliance)</h2>
+        <h2 class="text-lg font-bold text-slate-900">1. Zero-Touch Payment Security (PCI-DSS Level 1)</h2>
         <p>
-          All credit card, debit card, and financial transactions are entered directly into encrypted checkout fields managed by our Merchant of Record, <strong>Paddle</strong>. PMS servers, extensions, and local databases <strong>never receive, process, or store</strong> your sensitive payment card details or CVVs. Paddle maintains PCI-DSS Level 1 certified infrastructure.
+          All credit card, debit card, and financial transactions are entered directly into encrypted checkout fields managed by our Merchant of Record, <strong>Paddle</strong>. PMS servers and databases <strong>never receive, process, or store</strong> your sensitive payment card details or CVVs. Paddle maintains PCI-DSS Level 1 certified banking-grade infrastructure.
         </p>
       </section>
 
       <section class="space-y-3">
-        <h2 class="text-lg font-bold text-slate-900">2. Authorized Cloud & Bring-Your-Own-Storage (BYOS) Architecture</h2>
+        <h2 class="text-lg font-bold text-slate-900">2. Cloud Data Storage & Encryption</h2>
         <p>
-          PMS operates locally within your browser sandbox (Chrome Manifest V3). Your research portfolios, draft documents, and compiled dossiers remain stored exclusively in <strong>your authorized Google Drive and local client-side storage</strong>. PMS does not retain, inspect, or monetize your private research materials on central servers.
+          Upon authorized user access, your project assets, document drafts, and uploaded materials are securely processed and stored within our dedicated encrypted cloud storage environments. We employ industry-standard encryption protocols (TLS 1.3 in transit and AES-256 at rest) to safeguard all active project files. <strong>PMS maintains strict confidentiality: your research materials, document assets, and drafts are never inspected, monetized, sold, or shared with unauthorized third parties.</strong>
         </p>
       </section>
 
       <section class="space-y-3">
-        <h2 class="text-lg font-bold text-slate-900">3. Transaction Data Handled via Paddle Webhooks</h2>
+        <h2 class="text-lg font-bold text-slate-900">3. Cloud Processing & Compilation Engine</h2>
         <p>
-          To deliver and manage your digital software licenses, we receive only non-sensitive transaction metadata from Paddle:
+          All document parsing, exhibit indexing, citation mapping, and high-resolution vector PDF compilation are executed securely on our cloud compilation server infrastructure. Processed assets are delivered directly and privately to the authenticated user's workspace.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-bold text-slate-900">4. Transaction Data Handled via Paddle Webhooks</h2>
+        <p>
+          To provision and manage your software licenses, we receive only non-sensitive transaction metadata from Paddle:
         </p>
         <ul class="list-disc pl-5 space-y-2 text-slate-600">
           <li>Paddle Order and Transaction IDs</li>
           <li>Purchased product and price identifiers (e.g., Single-Project Lifetime Pass)</li>
-          <li>Customer email address (utilized strictly for license provisioning and customer support)</li>
-          <li>Subscription status flags (active, canceled, or past-due)</li>
-        </ul>
-      </section>
-
-      <section class="space-y-3">
-        <h2 class="text-lg font-bold text-slate-900">4. Third-Party Sub-processors</h2>
-        <p>
-          We engage the following authorized sub-processors for billing and operational delivery:
-        </p>
-        <ul class="list-disc pl-5 space-y-2 text-slate-600">
-          <li><strong>Paddle Payments Ltd / Paddle.com Market Ltd (UK):</strong> Merchant of Record, transaction processing, and international tax compliance.</li>
-          <li><strong>Google Cloud Platform:</strong> Optional client OAuth authorization and cloud storage synchronization.</li>
+          <li>Customer email address (utilized strictly for license provisioning and technical support)</li>
+          <li>Subscription lifecycle flags (active, past-due, or canceled)</li>
         </ul>
       </section>
 
       <section class="space-y-3">
         <h2 class="text-lg font-bold text-slate-900">5. Regulatory Non-Decision Safeguard</h2>
         <p>
-          PMS is strictly an assistive document formatting and layout software utility. 
+          PMS is strictly an assistive cloud document formatting, indexing, and compilation SaaS tool. 
           <strong>PMS does not make, calculate, or materially influence any legal, credit, employment, or immigration decisions regarding any natural person.</strong>
           PMS does not provide legal, financial, or regulated professional advice.
         </p>
       </section>
 
       <section class="space-y-3">
-        <h2 class="text-lg font-bold text-slate-900">6. Contact Data Privacy Officer</h2>
+        <h2 class="text-lg font-bold text-slate-900">6. Data Retention & Deletion Rights</h2>
         <p>
-          If you have questions regarding our privacy practices or wish to request data deletion, contact our privacy contact at <a href="mailto:wizardor@gmail.com" class="text-emerald-700 underline font-semibold">wizardor@gmail.com</a>.
+          Users retain full ownership of their materials and may request deletion of their project assets and account information at any time by contacting our support team at <a href="mailto:wizardor@gmail.com" class="text-emerald-700 underline font-semibold">wizardor@gmail.com</a>.
         </p>
       </section>
     </div>
