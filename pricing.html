@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing & Plans | PMS - Enterprise AI Petition Management System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Paddle.js v2 Live SDK -->
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex flex-col min-h-screen">
+
+  <!-- Navigation Bar -->
+  <header class="border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+          P
+        </div>
+        <span class="font-extrabold text-lg text-slate-900 tracking-tight">PMS Workbench</span>
+      </a>
+      <nav class="flex items-center gap-6 text-sm font-semibold text-slate-600">
+        <a href="index.html" class="hover:text-slate-900 transition">Overview</a>
+        <a href="pricing.html" class="text-emerald-600 font-bold hover:text-emerald-700 transition">Pricing</a>
+        <a href="terms.html" class="hover:text-slate-900 transition">Terms</a>
+        <a href="privacy.html" class="hover:text-slate-900 transition">Privacy</a>
+        <a href="refund.html" class="hover:text-slate-900 transition">Refunds</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main id="pricing" class="max-w-6xl mx-auto px-4 py-16 flex-grow">
+    <div class="text-center space-y-3 mb-12">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold border border-emerald-200 shadow-2xs">
+        <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        <span>Secured by Paddle Merchant of Record (MoR) · 14-Day Money-Back Guarantee</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        Transparent Pricing for Evidentiary Petition Dossiers
+      </h1>
+      <p class="text-base text-slate-600 max-w-2xl mx-auto">
+        Designed for self-petitioners and professional immigration law firms. All Pro subscriptions feature 100% credit deduction towards lifetime passes.
+      </p>
+
+      <!-- Cycle Switcher -->
+      <div class="pt-6 flex justify-center">
+        <div class="inline-flex p-1 bg-slate-200/80 rounded-xl border border-slate-300 text-xs font-bold shadow-inner">
+          <button id="btn-monthly" onclick="switchCycle('monthly')" class="px-4 py-2 rounded-lg transition text-slate-600 hover:text-slate-900">
+            Monthly
+          </button>
+          <button id="btn-quarterly" onclick="switchCycle('quarterly')" class="px-4 py-2 rounded-lg transition bg-white text-emerald-700 shadow-xs flex items-center gap-1 font-bold">
+            <span>Quarterly</span>
+            <span class="bg-amber-100 text-amber-800 text-[10px] px-1.5 py-0.5 rounded font-bold">Recommended</span>
+          </button>
+          <button id="btn-yearly" onclick="switchCycle('yearly')" class="px-4 py-2 rounded-lg transition text-slate-600 hover:text-slate-900 flex items-center gap-1">
+            <span>Annual</span>
+            <span class="bg-emerald-100 text-emerald-800 text-[10px] px-1.5 py-0.5 rounded font-bold">Save 57%</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Card 1: Starter / Pro Prep -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+        <div class="space-y-4">
+          <div>
+            <span class="text-xs font-mono font-bold text-slate-400">STARTER</span>
+            <h3 class="text-lg font-bold text-slate-900">⚡ Pro Preparation</h3>
+            <p class="text-xs text-slate-500 mt-1">Deep petition modeling, precedent concordance & form draft previews.</p>
+          </div>
+          <div class="pt-2 border-t border-slate-100">
+            <div class="flex items-baseline gap-1">
+              <span id="price-pro" class="text-3xl font-black text-slate-900 font-mono">$199</span>
+              <span id="period-pro" class="text-xs text-slate-500 font-medium">/quarter</span>
+            </div>
+            <p class="text-[11px] text-emerald-600 font-semibold mt-1">100% deductible towards buyout</p>
+          </div>
+          <ul class="space-y-2.5 text-xs text-slate-600 pt-2 border-t border-slate-100">
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Up to 3 active petition projects</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> 38,547 AAO official precedents corpus</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> USCIS Form I-140 & ETA-9089 preview</li>
+          </ul>
+        </div>
+        <div class="pt-6">
+          <button onclick="openPaddleCheckout(currentProPriceId)" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow-xs">
+            Subscribe Starter
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2: Pro / Single-Case Pass -->
+      <div class="rounded-2xl border-2 border-emerald-500 bg-white p-6 shadow-lg flex flex-col justify-between relative ring-2 ring-emerald-500/20">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[10.5px] font-extrabold uppercase px-3 py-0.5 rounded-full tracking-wider shadow-xs">
+          ★ Most Popular for Petitioners
+        </div>
+        <div class="space-y-4">
+          <div>
+            <span class="text-xs font-mono font-bold text-emerald-600">PRO FLAGSHIP</span>
+            <h3 class="text-lg font-bold text-slate-900">🌟 Single-Case Pass</h3>
+            <p class="text-xs text-slate-500 mt-1">Full-cycle dossier compilation until final approval with 1x RFE brief.</p>
+          </div>
+          <div class="pt-2 border-t border-slate-100">
+            <div class="flex items-baseline gap-1">
+              <span class="text-3xl font-black text-slate-900 font-mono">$699</span>
+              <span class="text-xs text-slate-500 font-medium">One-time</span>
+            </div>
+            <p class="text-[11px] text-emerald-600 font-semibold mt-1">Early-Bird · 14-day refund guarantee</p>
+          </div>
+          <ul class="space-y-2.5 text-xs text-slate-600 pt-2 border-t border-slate-100">
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Unlimited dossier synthesis till approval</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Bit-perfect PDF filing package export</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Statutory RFE/NOID rebuttal generator</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Principal beneficiary identity lock</li>
+          </ul>
+        </div>
+        <div class="pt-6">
+          <button onclick="openPaddleCheckout('pri_01m62yxa4ymwd403hmzstq3a38')" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition shadow-md">
+            Get Lifetime Pass
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 3: Advanced / Boutique Law Firm -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+        <div class="space-y-4">
+          <div>
+            <span class="text-xs font-mono font-bold text-slate-400">ADVANCED</span>
+            <h3 class="text-lg font-bold text-slate-900">🏛️ Boutique Law Firm</h3>
+            <p class="text-xs text-slate-500 mt-1">Multi-user collaborative workbench for professional legal practices.</p>
+          </div>
+          <div class="pt-2 border-t border-slate-100">
+            <div class="flex items-baseline gap-1">
+              <span id="price-firm" class="text-3xl font-black text-slate-900 font-mono">$1,390</span>
+              <span id="period-firm" class="text-xs text-slate-500 font-medium">/quarter</span>
+            </div>
+            <p class="text-[11px] text-slate-500 font-semibold mt-1">Includes 5 Seats & 50 Active Cases</p>
+          </div>
+          <ul class="space-y-2.5 text-xs text-slate-600 pt-2 border-t border-slate-100">
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> 5 Concurrent attorney/staff seats</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> 50 Active client petition dossiers</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Bring-Your-Own-Storage (BYOS) isolation</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Dedicated technical advisor SLA</li>
+          </ul>
+        </div>
+        <div class="pt-6">
+          <button onclick="openPaddleCheckout(currentFirmPriceId)" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow-xs">
+            Subscribe Practice
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 4: Enterprise Practice -->
+      <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs flex flex-col justify-between">
+        <div class="space-y-4">
+          <div>
+            <span class="text-xs font-mono font-bold text-slate-400">ENTERPRISE</span>
+            <h3 class="text-lg font-bold text-slate-900">🏛️ Enterprise Firm</h3>
+            <p class="text-xs text-slate-500 mt-1">Custom corporate contract with enterprise SLAs and wire invoicing.</p>
+          </div>
+          <div class="pt-2 border-t border-slate-200">
+            <div class="text-2xl font-black text-slate-900">Contact Sales</div>
+            <p class="text-[11px] text-slate-500 font-medium mt-1">Custom Quotas & Procurement</p>
+          </div>
+          <ul class="space-y-2.5 text-xs text-slate-600 pt-2 border-t border-slate-200">
+            <li class="flex items-center gap-2"><span class="text-slate-400 font-bold">✓</span> Unlimited custom attorney seats</li>
+            <li class="flex items-center gap-2"><span class="text-slate-400 font-bold">✓</span> Formal corporate NDA & MSA agreements</li>
+            <li class="flex items-center gap-2"><span class="text-slate-400 font-bold">✓</span> Direct corporate wire bank transfers</li>
+          </ul>
+        </div>
+        <div class="pt-6">
+          <a href="mailto:wizardor@gmail.com?subject=PMS%20Enterprise%20Law%20Firm%20Inquiry" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs flex items-center justify-center transition shadow-xs">
+            Contact Sales
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Dual Case Pass Special Callout -->
+    <div class="mt-8 p-6 rounded-2xl border border-emerald-200 bg-emerald-50/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="space-y-1 text-center sm:text-left">
+        <h4 class="font-extrabold text-slate-900 text-sm">Need dual-track concurrent filing? (e.g. EB-1A + NIW)</h4>
+        <p class="text-xs text-slate-600">Get the <strong>PMS Lifetime Dual-Case Pass</strong> for <strong>$999.00</strong> (one-time payment) with simultaneous dual-track synthesis.</p>
+      </div>
+      <button onclick="openPaddleCheckout('pri_01m62yz6gy95weaxyefzy8kqhc')" class="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs whitespace-nowrap shadow-xs transition">
+        Get Dual-Case Pass ($999)
+      </button>
+    </div>
+
+    <!-- Legal Footer for Paddle Underwriting -->
+    <footer class="mt-20 pt-8 border-t border-slate-200 text-xs text-slate-500 space-y-4">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <p>© 2026 PMS AI Co-pilot Studio. All rights reserved.</p>
+          <p class="mt-0.5">Contact Support: <a href="mailto:wizardor@gmail.com" class="text-emerald-700 underline font-semibold">wizardor@gmail.com</a></p>
+        </div>
+        <div class="flex items-center gap-6 font-semibold text-slate-700">
+          <a href="index.html" class="hover:text-emerald-600">Home</a>
+          <a href="terms.html" class="hover:text-emerald-600">Terms of Service</a>
+          <a href="privacy.html" class="hover:text-emerald-600">Privacy Policy</a>
+          <a href="refund.html" class="hover:text-emerald-600">Refund Policy</a>
+        </div>
+      </div>
+      <div class="bg-slate-100 p-4 rounded-xl text-[11px] leading-relaxed text-slate-500 space-y-1">
+        <p><strong>Merchant of Record Disclosure:</strong> Payments and order fulfillment are processed securely by our Merchant of Record, <strong>Paddle.com Market Ltd</strong> or <strong>Paddle Payments Ltd</strong>. Paddle handles international sales tax, VAT, and global payment compliance.</p>
+        <p><strong>UPL Safe-Harbor Disclaimer:</strong> PMS is an automated document structuring and AI drafting software tool. PMS is not a law firm, does not practice law, and does not provide legal representation. Use of this service does not establish an attorney-client relationship.</p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const priceIds = {
+      pro: {
+        monthly: "pri_01m62yqpmq6xn7y26jar2srvnp",
+        quarterly: "pri_01m62zhc74dr729rm8zsdzj0s3",
+        yearly: "pri_01m62ysx796zem27xb4j6aczm2"
+      },
+      firm: {
+        monthly: "pri_01m62z19y7adz1a0gypkp4bbry",
+        quarterly: "pri_01m62zqagzd4ae1qsfa4njb409",
+        yearly: "pri_01m62z28ynj7f783t4jq0w77yt"
+      }
+    };
+
+    let currentProPriceId = priceIds.pro.quarterly;
+    let currentFirmPriceId = priceIds.firm.quarterly;
+
+    function switchCycle(cycle) {
+      const btnM = document.getElementById("btn-monthly");
+      const btnQ = document.getElementById("btn-quarterly");
+      const btnY = document.getElementById("btn-yearly");
+
+      btnM.className = "px-4 py-2 rounded-lg transition text-slate-600 hover:text-slate-900";
+      btnQ.className = "px-4 py-2 rounded-lg transition text-slate-600 hover:text-slate-900 flex items-center gap-1";
+      btnY.className = "px-4 py-2 rounded-lg transition text-slate-600 hover:text-slate-900 flex items-center gap-1";
+
+      const activeClass = "px-4 py-2 rounded-lg transition bg-white text-emerald-700 shadow-xs flex items-center gap-1 font-bold";
+
+      if (cycle === "monthly") {
+        btnM.className = activeClass;
+        document.getElementById("price-pro").innerText = "$79";
+        document.getElementById("period-pro").innerText = "/month";
+        document.getElementById("price-firm").innerText = "$499";
+        document.getElementById("period-firm").innerText = "/month";
+        currentProPriceId = priceIds.pro.monthly;
+        currentFirmPriceId = priceIds.firm.monthly;
+      } else if (cycle === "quarterly") {
+        btnQ.className = activeClass;
+        document.getElementById("price-pro").innerText = "$199";
+        document.getElementById("period-pro").innerText = "/quarter";
+        document.getElementById("price-firm").innerText = "$1,390";
+        document.getElementById("period-firm").innerText = "/quarter";
+        currentProPriceId = priceIds.pro.quarterly;
+        currentFirmPriceId = priceIds.firm.quarterly;
+      } else if (cycle === "yearly") {
+        btnY.className = activeClass;
+        document.getElementById("price-pro").innerText = "$690";
+        document.getElementById("period-pro").innerText = "/year";
+        document.getElementById("price-firm").innerText = "$4,990";
+        document.getElementById("period-firm").innerText = "/year";
+        currentProPriceId = priceIds.pro.yearly;
+        currentFirmPriceId = priceIds.firm.yearly;
+      }
+    }
+
+    function openPaddleCheckout(priceId) {
+      window.open("https://buy.paddle.com/checkout?price_id=" + priceId, "_blank");
+    }
+  </script>
+</body>
+</html>

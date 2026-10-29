@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | PMS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex flex-col min-h-screen">
+
+  <!-- Navigation Bar -->
+  <header class="border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+          P
+        </div>
+        <span class="font-extrabold text-lg text-slate-900 tracking-tight">PMS Workbench</span>
+      </a>
+      <nav class="flex items-center gap-6 text-sm font-semibold text-slate-600">
+        <a href="index.html" class="hover:text-slate-900 transition">Overview</a>
+        <a href="pricing.html" class="hover:text-slate-900 transition">Pricing</a>
+        <a href="terms.html" class="hover:text-slate-900 transition">Terms</a>
+        <a href="privacy.html" class="text-emerald-600 font-bold hover:text-emerald-700 transition">Privacy</a>
+        <a href="refund.html" class="hover:text-slate-900 transition">Refunds</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-12 flex-grow space-y-8">
+    <div class="space-y-2 border-b border-slate-200 pb-6">
+      <h1 class="text-3xl font-extrabold text-slate-900">Privacy Policy</h1>
+      <p class="text-sm text-slate-500">Effective Date: October 28, 2026 · Operator: PMS AI Co-pilot Studio · Payment MoR: Paddle.com</p>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-xs space-y-6 text-sm leading-relaxed text-slate-700">
+      <section class="space-y-3">
+        <h2 class="text-lg font-bold text-slate-900">1. Zero-Touch Payment Security (PCI-DSS Compliance)</h2>
+        <p>
+          All credit card, debit card, and financial transactions are entered directly into encrypted checkout fields managed by our Merchant of Record, <strong>Paddle</strong>. PMS servers, extensions, and local databases <strong>never receive, process, or store</strong> your sensitive payment card details or CVVs. Paddle maintains PCI-DSS Level 1 certified infrastructure.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-bold text-slate-900">2. Bring-Your-Own-Storage (BYOS) Architecture</h2>
+        <p>
+          PMS operates primarily inside your local browser runtime (Chrome Manifest V3). Your evidentiary materials, draft letters, and confidential petition forms remain stored exclusively in your own designated Google Drive and client-side storage. PMS does not retain, inspect, or sell your confidential legal evidence.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-bold text-slate-900">3. Transaction Data Handled via Paddle Webhooks</h2>
+        <p>
+          To deliver and manage your digital software licenses, we receive only non-sensitive transaction metadata from Paddle:
+        </p>
+        <ul class="list-disc pl-5 space-y-2 text-slate-600">
+          <li>Paddle Order and Transaction IDs</li>
+          <li>Purchased product and price identifiers (e.g., Single-Case Lifetime Pass)</li>
+          <li>Customer email address (utilized strictly for license provisioning and customer support)</li>
+          <li>Subscription status flags (active, canceled, or past-due)</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-bold text-slate-900">4. Third-Party Sub-processors</h2>
+        <p>
+          We engage the following authorized sub-processors for billing and operational delivery:
+        </p>
+        <ul class="list-disc pl-5 space-y-2 text-slate-600">
+          <li><strong>Paddle Payments Ltd / Paddle.com Market Ltd (UK):</strong> Merchant of Record, transaction processing, and international tax compliance.</li>
+          <li><strong>Google Cloud Platform / Firebase:</strong> Optional user authentication and licensing ledger synchronization.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-bold text-slate-900">5. Contact Data Privacy Officer</h2>
+        <p>
+          If you have questions regarding our privacy practices or wish to request data deletion, contact our privacy contact at <a href="mailto:wizardor@gmail.com" class="text-emerald-700 underline font-semibold">wizardor@gmail.com</a>.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <!-- Legal Footer -->
+  <footer class="mt-20 pt-8 border-t border-slate-200 text-xs text-slate-500 bg-white">
+    <div class="max-w-6xl mx-auto px-4 space-y-4 pb-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <p>© 2026 PMS AI Co-pilot Studio. All rights reserved.</p>
+          <p class="mt-0.5">Contact Support: <a href="mailto:wizardor@gmail.com" class="text-emerald-700 underline font-semibold">wizardor@gmail.com</a></p>
+        </div>
+        <div class="flex items-center gap-6 font-semibold text-slate-700">
+          <a href="index.html" class="hover:text-emerald-600">Home</a>
+          <a href="pricing.html" class="hover:text-emerald-600">Pricing</a>
+          <a href="terms.html" class="hover:text-emerald-600">Terms of Service</a>
+          <a href="privacy.html" class="hover:text-emerald-600">Privacy Policy</a>
+          <a href="refund.html" class="hover:text-emerald-600">Refund Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
