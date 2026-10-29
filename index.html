@@ -6,6 +6,13 @@
   <title>PMS - Cloud Document & Citation Formatting Platform</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="i18n.js"></script>
+  <style>
+    /* 简体/繁体：Hero 主标题桌面端强制单行显示（移动端仍允许自然换行） */
+    @media (min-width: 768px) {
+      html[lang="zh"] h1[data-i18n="hero_title"],
+      html[lang="zh-TW"] h1[data-i18n="hero_title"] { white-space: nowrap; }
+    }
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex flex-col min-h-screen">
 
@@ -44,7 +51,7 @@
 
   <!-- Hero Section -->
   <main class="max-w-6xl mx-auto px-4 py-16 flex-grow space-y-16">
-    <div class="text-center space-y-4 max-w-3xl mx-auto">
+    <div class="text-center space-y-4 max-w-4xl mx-auto">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/70 text-emerald-800 text-xs font-semibold border border-emerald-200 shadow-2xs">
         <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
         <span data-i18n="hero_badge">Cloud Document Productivity SaaS</span>
@@ -52,7 +59,7 @@
       <h1 data-i18n="hero_title" class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
         Cloud Document & Citation Formatting Platform
       </h1>
-      <p data-i18n="hero_desc" class="text-base sm:text-lg text-slate-600">
+      <p data-i18n="hero_desc" class="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto">
         PMS is an enterprise cloud SaaS workbench designed for researchers, academic scholars, and technical authors. It streamlines complex document compilation, citation referencing, bibliographic indexing, and publication-ready vector PDF rendering.
       </p>
       <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
