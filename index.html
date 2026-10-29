@@ -5,25 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PMS - Cloud Document & Citation Formatting Platform</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="i18n.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex flex-col min-h-screen">
 
   <!-- Navigation Bar -->
   <header class="border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2.5">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-2.5 shrink-0">
         <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
           P
         </div>
         <span class="font-extrabold text-lg text-slate-900 tracking-tight">PMS Workbench</span>
       </a>
-      <nav class="flex items-center gap-6 text-sm font-semibold text-slate-600">
-        <a href="index.html" class="text-emerald-600 font-bold hover:text-emerald-700 transition">Overview</a>
-        <a href="pricing.html" class="hover:text-slate-900 transition">Pricing</a>
-        <a href="terms.html" class="hover:text-slate-900 transition">Terms</a>
-        <a href="privacy.html" class="hover:text-slate-900 transition">Privacy</a>
-        <a href="refund.html" class="hover:text-slate-900 transition">Refunds</a>
-      </nav>
+
+      <div class="flex items-center gap-4 sm:gap-6">
+        <nav class="hidden sm:flex items-center gap-5 text-sm font-semibold text-slate-600">
+          <a href="index.html" data-i18n="nav_overview" class="text-emerald-600 font-bold hover:text-emerald-700 transition">Overview</a>
+          <a href="pricing.html" data-i18n="nav_pricing" class="hover:text-slate-900 transition">Pricing</a>
+          <a href="terms.html" data-i18n="nav_terms" class="hover:text-slate-900 transition">Terms</a>
+          <a href="privacy.html" data-i18n="nav_privacy" class="hover:text-slate-900 transition">Privacy</a>
+          <a href="refund.html" data-i18n="nav_refunds" class="hover:text-slate-900 transition">Refunds</a>
+        </nav>
+
+        <!-- 界面语言切换器 (对齐插件端 [ 简 | EN | 繁 | ES | 日 | 韩 ]) -->
+        <div class="inline-flex items-center gap-0.5 p-0.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold shadow-2xs">
+          <span class="text-slate-400 pl-1.5 pr-0.5 text-[11px]">🌐</span>
+          <button onclick="setLang('zh')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="zh">简</button>
+          <button onclick="setLang('en')" class="lang-btn px-2 py-0.5 rounded-full bg-white text-emerald-700 font-extrabold shadow-xs transition" data-lang="en">EN</button>
+          <button onclick="setLang('zh-TW')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="zh-TW">繁</button>
+          <button onclick="setLang('es')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="es">ES</button>
+          <button onclick="setLang('ja')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="ja">日</button>
+          <button onclick="setLang('ko')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="ko">韩</button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -32,19 +47,19 @@
     <div class="text-center space-y-4 max-w-3xl mx-auto">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/70 text-emerald-800 text-xs font-semibold border border-emerald-200 shadow-2xs">
         <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-        <span>Cloud Document Productivity SaaS</span>
+        <span data-i18n="hero_badge">Cloud Document Productivity SaaS</span>
       </div>
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+      <h1 data-i18n="hero_title" class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
         Cloud Document & Citation Formatting Platform
       </h1>
-      <p class="text-base sm:text-lg text-slate-600">
+      <p data-i18n="hero_desc" class="text-base sm:text-lg text-slate-600">
         PMS is an enterprise cloud SaaS workbench designed for researchers, academic scholars, and technical authors. It streamlines complex document compilation, citation referencing, bibliographic indexing, and publication-ready vector PDF rendering.
       </p>
       <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
-        <a href="pricing.html" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition">
+        <a href="pricing.html" data-i18n="btn_view_pricing" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition">
           View Pricing & Plans →
         </a>
-        <a href="terms.html" class="px-6 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-bold text-sm border border-slate-200 shadow-xs transition">
+        <a href="terms.html" data-i18n="btn_terms" class="px-6 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-bold text-sm border border-slate-200 shadow-xs transition">
           Terms of Service
         </a>
       </div>
@@ -56,8 +71,8 @@
         <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold">
           📑
         </div>
-        <h3 class="font-bold text-slate-900 text-base">Citation & Bibliography Indexing</h3>
-        <p class="text-xs text-slate-600 leading-relaxed">
+        <h3 data-i18n="pillar1_title" class="font-bold text-slate-900 text-base">Citation & Bibliography Indexing</h3>
+        <p data-i18n="pillar1_desc" class="text-xs text-slate-600 leading-relaxed">
           Automate multi-section tables of contents, document bookmarking, sequential pagination, and academic citation reference tables with strict formatting accuracy.
         </p>
       </div>
@@ -66,8 +81,8 @@
         <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold">
           ☁️
         </div>
-        <h3 class="font-bold text-slate-900 text-base">Cloud Compilation Engine</h3>
-        <p class="text-xs text-slate-600 leading-relaxed">
+        <h3 data-i18n="pillar2_title" class="font-bold text-slate-900 text-base">Cloud Compilation Engine</h3>
+        <p data-i18n="pillar2_desc" class="text-xs text-slate-600 leading-relaxed">
           High-performance server-side rendering pipelines compile multi-source materials—papers, certificates, and large data tables—into publication-grade vector PDFs.
         </p>
       </div>
@@ -76,8 +91,8 @@
         <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl font-bold">
           🔒
         </div>
-        <h3 class="font-bold text-slate-900 text-base">Encrypted Cloud Storage</h3>
-        <p class="text-xs text-slate-600 leading-relaxed">
+        <h3 data-i18n="pillar3_title" class="font-bold text-slate-900 text-base">Encrypted Cloud Storage</h3>
+        <p data-i18n="pillar3_desc" class="text-xs text-slate-600 leading-relaxed">
           All authorized user assets and active projects are securely processed and stored in enterprise-grade encrypted cloud infrastructure with strict access isolation.
         </p>
       </div>
@@ -86,19 +101,19 @@
     <!-- Merchant of Record Banner -->
     <div class="bg-emerald-900 text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-xl">
       <div class="relative z-10 max-w-2xl space-y-4">
-        <div class="inline-block px-3 py-1 rounded-full bg-emerald-800 text-emerald-200 text-xs font-semibold">
+        <div data-i18n="mor_badge" class="inline-block px-3 py-1 rounded-full bg-emerald-800 text-emerald-200 text-xs font-semibold">
           Global Merchant of Record (MoR)
         </div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+        <h2 data-i18n="mor_title" class="text-2xl sm:text-3xl font-extrabold tracking-tight">
           Safe, Compliant Billing Powered by Paddle
         </h2>
-        <p class="text-emerald-100 text-xs sm:text-sm leading-relaxed">
+        <p data-i18n="mor_desc" class="text-emerald-100 text-xs sm:text-sm leading-relaxed">
           All financial transactions for PMS licenses are handled securely by Paddle (Paddle Payments Ltd / Paddle.com Market Ltd). Paddle acts as our Merchant of Record, managing international tax, PCI-DSS Level 1 payment security, and buyer protection.
         </p>
         <div class="pt-2 flex flex-wrap gap-4 text-xs font-bold">
-          <span class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Enterprise Cloud Security</span>
-          <span class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> PCI-DSS Level 1 Certified</span>
-          <span class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Instant License Provisioning</span>
+          <span class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> <span data-i18n="mor_feat1">Enterprise Cloud Security</span></span>
+          <span class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> <span data-i18n="mor_feat2">PCI-DSS Level 1 Certified</span></span>
+          <span class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> <span data-i18n="mor_feat3">Instant License Provisioning</span></span>
         </div>
       </div>
     </div>
@@ -109,19 +124,19 @@
     <div class="max-w-6xl mx-auto px-4 space-y-4 pb-8">
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
-          <p>© 2026 PMS Software Studio. All rights reserved.</p>
-          <p class="mt-0.5">Contact Support: <a href="mailto:wizardor@gmail.com" class="text-emerald-700 underline font-semibold">wizardor@gmail.com</a></p>
+          <p data-i18n="footer_rights">© 2026 PMS Software Studio. All rights reserved.</p>
+          <p class="mt-0.5"><span data-i18n="footer_support">Contact Support:</span> <a href="mailto:wizardor@gmail.com" class="text-emerald-700 underline font-semibold">wizardor@gmail.com</a></p>
         </div>
         <div class="flex items-center gap-6 font-semibold text-slate-700">
-          <a href="index.html" class="hover:text-emerald-600">Home</a>
-          <a href="pricing.html" class="hover:text-emerald-600">Pricing</a>
-          <a href="terms.html" class="hover:text-emerald-600">Terms of Service</a>
-          <a href="privacy.html" class="hover:text-emerald-600">Privacy Policy</a>
-          <a href="refund.html" class="hover:text-emerald-600">Refund Policy</a>
+          <a href="index.html" data-i18n="nav_overview" class="hover:text-emerald-600">Home</a>
+          <a href="pricing.html" data-i18n="nav_pricing" class="hover:text-emerald-600">Pricing</a>
+          <a href="terms.html" data-i18n="nav_terms" class="hover:text-emerald-600">Terms of Service</a>
+          <a href="privacy.html" data-i18n="nav_privacy" class="hover:text-emerald-600">Privacy Policy</a>
+          <a href="refund.html" data-i18n="nav_refunds" class="hover:text-emerald-600">Refund Policy</a>
         </div>
       </div>
       <div class="bg-slate-50 p-4 rounded-xl text-[11px] leading-relaxed text-slate-500 space-y-1 border border-slate-200">
-        <p><strong>Merchant of Record Disclosure:</strong> Payments and order fulfillment are processed securely by our Merchant of Record, <strong>Paddle.com Market Ltd</strong> or <strong>Paddle Payments Ltd</strong>. Paddle handles international sales tax, VAT, and global payment compliance.</p>
+        <p><strong data-i18n="footer_mor_title">Merchant of Record Disclosure:</strong> <span data-i18n="footer_mor_desc">Payments and order fulfillment are processed securely by our Merchant of Record, Paddle.com Market Ltd or Paddle Payments Ltd. Paddle handles international sales tax, VAT, and global payment compliance.</span></p>
       </div>
     </div>
   </footer>

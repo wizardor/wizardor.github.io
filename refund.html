@@ -5,25 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Refund & Cancellation Policy | PMS</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="i18n.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex flex-col min-h-screen">
 
   <!-- Navigation Bar -->
   <header class="border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2.5">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-2.5 shrink-0">
         <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
           P
         </div>
         <span class="font-extrabold text-lg text-slate-900 tracking-tight">PMS Workbench</span>
       </a>
-      <nav class="flex items-center gap-6 text-sm font-semibold text-slate-600">
-        <a href="index.html" class="hover:text-slate-900 transition">Overview</a>
-        <a href="pricing.html" class="hover:text-slate-900 transition">Pricing</a>
-        <a href="terms.html" class="hover:text-slate-900 transition">Terms</a>
-        <a href="privacy.html" class="hover:text-slate-900 transition">Privacy</a>
-        <a href="refund.html" class="text-emerald-600 font-bold hover:text-emerald-700 transition">Refunds</a>
-      </nav>
+
+      <div class="flex items-center gap-4 sm:gap-6">
+        <nav class="hidden sm:flex items-center gap-5 text-sm font-semibold text-slate-600">
+          <a href="index.html" data-i18n="nav_overview" class="hover:text-slate-900 transition">Overview</a>
+          <a href="pricing.html" data-i18n="nav_pricing" class="hover:text-slate-900 transition">Pricing</a>
+          <a href="terms.html" data-i18n="nav_terms" class="hover:text-slate-900 transition">Terms</a>
+          <a href="privacy.html" data-i18n="nav_privacy" class="hover:text-slate-900 transition">Privacy</a>
+          <a href="refund.html" data-i18n="nav_refunds" class="text-emerald-600 font-bold hover:text-emerald-700 transition">Refunds</a>
+        </nav>
+
+        <!-- 界面语言切换器 (对齐插件端 [ 简 | EN | 繁 | ES | 日 | 韩 ]) -->
+        <div class="inline-flex items-center gap-0.5 p-0.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold shadow-2xs">
+          <span class="text-slate-400 pl-1.5 pr-0.5 text-[11px]">🌐</span>
+          <button onclick="setLang('zh')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="zh">简</button>
+          <button onclick="setLang('en')" class="lang-btn px-2 py-0.5 rounded-full bg-white text-emerald-700 font-extrabold shadow-xs transition" data-lang="en">EN</button>
+          <button onclick="setLang('zh-TW')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="zh-TW">繁</button>
+          <button onclick="setLang('es')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="es">ES</button>
+          <button onclick="setLang('ja')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="ja">日</button>
+          <button onclick="setLang('ko')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="ko">韩</button>
+        </div>
+      </div>
     </div>
   </header>
 

@@ -7,25 +7,41 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Paddle.js v2 SDK -->
   <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <!-- Multilingual i18n Engine -->
+  <script src="i18n.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex flex-col min-h-screen">
 
   <!-- Navigation Bar -->
   <header class="border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2.5">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-2.5 shrink-0">
         <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
           P
         </div>
         <span class="font-extrabold text-lg text-slate-900 tracking-tight">PMS Workbench</span>
       </a>
-      <nav class="flex items-center gap-6 text-sm font-semibold text-slate-600">
-        <a href="index.html" class="hover:text-slate-900 transition">Overview</a>
-        <a href="pricing.html" class="text-emerald-600 font-bold hover:text-emerald-700 transition">Pricing</a>
-        <a href="terms.html" class="hover:text-slate-900 transition">Terms</a>
-        <a href="privacy.html" class="hover:text-slate-900 transition">Privacy</a>
-        <a href="refund.html" class="hover:text-slate-900 transition">Refunds</a>
-      </nav>
+
+      <div class="flex items-center gap-4 sm:gap-6">
+        <nav class="hidden sm:flex items-center gap-5 text-sm font-semibold text-slate-600">
+          <a href="index.html" data-i18n="nav_overview" class="hover:text-slate-900 transition">Overview</a>
+          <a href="pricing.html" data-i18n="nav_pricing" class="text-emerald-600 font-bold hover:text-emerald-700 transition">Pricing</a>
+          <a href="terms.html" data-i18n="nav_terms" class="hover:text-slate-900 transition">Terms</a>
+          <a href="privacy.html" data-i18n="nav_privacy" class="hover:text-slate-900 transition">Privacy</a>
+          <a href="refund.html" data-i18n="nav_refunds" class="hover:text-slate-900 transition">Refunds</a>
+        </nav>
+
+        <!-- 界面语言切换器 (对齐插件端 [ 简 | EN | 繁 | ES | 日 | 韩 ]) -->
+        <div class="inline-flex items-center gap-0.5 p-0.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold shadow-2xs">
+          <span class="text-slate-400 pl-1.5 pr-0.5 text-[11px]">🌐</span>
+          <button onclick="setLang('zh')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="zh">简</button>
+          <button onclick="setLang('en')" class="lang-btn px-2 py-0.5 rounded-full bg-white text-emerald-700 font-extrabold shadow-xs transition" data-lang="en">EN</button>
+          <button onclick="setLang('zh-TW')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="zh-TW">繁</button>
+          <button onclick="setLang('es')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="es">ES</button>
+          <button onclick="setLang('ja')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="ja">日</button>
+          <button onclick="setLang('ko')" class="lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition" data-lang="ko">韩</button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -36,12 +52,12 @@
         <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
-        <span>Secured by Paddle Merchant of Record (MoR) · PCI-DSS Level 1 Security</span>
+        <span data-i18n="pricing_badge">Secured by Paddle Merchant of Record (MoR) · PCI-DSS Level 1 Security</span>
       </div>
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+      <h1 data-i18n="pricing_title" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
         Transparent Pricing for Professional Document Compilation
       </h1>
-      <p class="text-base text-slate-600 max-w-2xl mx-auto">
+      <p data-i18n="pricing_desc" class="text-base text-slate-600 max-w-2xl mx-auto">
         Designed for researchers, scholars, and technical authors. All Pro subscriptions feature 100% credit deduction towards lifetime passes.
       </p>
 
@@ -49,15 +65,15 @@
       <div class="pt-6 flex justify-center">
         <div class="inline-flex p-1 bg-slate-200/80 rounded-xl border border-slate-300 text-xs font-bold shadow-inner">
           <button id="btn-monthly" onclick="switchCycle('monthly')" class="px-4 py-2 rounded-lg transition text-slate-600 hover:text-slate-900">
-            Monthly
+            <span data-i18n="cycle_monthly">Monthly</span>
           </button>
           <button id="btn-quarterly" onclick="switchCycle('quarterly')" class="px-4 py-2 rounded-lg transition bg-white text-emerald-700 shadow-xs flex items-center gap-1 font-bold">
-            <span>Quarterly</span>
-            <span class="bg-amber-100 text-amber-800 text-[10px] px-1.5 py-0.5 rounded font-bold">Recommended</span>
+            <span data-i18n="cycle_quarterly">Quarterly</span>
+            <span data-i18n="badge_recommended" class="bg-amber-100 text-amber-800 text-[10px] px-1.5 py-0.5 rounded font-bold">Recommended</span>
           </button>
           <button id="btn-yearly" onclick="switchCycle('yearly')" class="px-4 py-2 rounded-lg transition text-slate-600 hover:text-slate-900 flex items-center gap-1">
-            <span>Annual</span>
-            <span class="bg-emerald-100 text-emerald-800 text-[10px] px-1.5 py-0.5 rounded font-bold">Save 57%</span>
+            <span data-i18n="cycle_yearly">Annual</span>
+            <span data-i18n="badge_save57" class="bg-emerald-100 text-emerald-800 text-[10px] px-1.5 py-0.5 rounded font-bold">Save 57%</span>
           </button>
         </div>
       </div>
@@ -66,29 +82,29 @@
     <!-- Pricing Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-      <!-- Card 1: Starter / Pro Prep -->
+      <!-- Card 1: Starter / Pro Studio -->
       <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs flex flex-col justify-between hover:shadow-md transition">
         <div class="space-y-4">
           <div>
-            <span class="text-xs font-mono font-bold text-slate-400">STARTER</span>
-            <h3 class="text-lg font-bold text-slate-900">⚡ Pro Studio</h3>
-            <p class="text-xs text-slate-500 mt-1">Document structuring, citation concordance & draft previews.</p>
+            <span data-i18n="card1_tier" class="text-xs font-mono font-bold text-slate-400">STARTER</span>
+            <h3 data-i18n="card1_title" class="text-lg font-bold text-slate-900">⚡ Pro Studio</h3>
+            <p data-i18n="card1_desc" class="text-xs text-slate-500 mt-1">Document structuring, citation concordance & draft previews.</p>
           </div>
           <div class="pt-2 border-t border-slate-100">
             <div class="flex items-baseline gap-1">
               <span id="price-pro" class="text-3xl font-black text-slate-900 font-mono">$199</span>
-              <span id="period-pro" class="text-xs text-slate-500 font-medium">/quarter</span>
+              <span id="period-pro" data-i18n="card1_period_qu" class="text-xs text-slate-500 font-medium">/quarter</span>
             </div>
-            <p class="text-[11px] text-emerald-600 font-semibold mt-1">100% deductible towards buyout</p>
+            <p data-i18n="card1_sub" class="text-[11px] text-emerald-600 font-semibold mt-1">100% deductible towards buyout</p>
           </div>
           <ul class="space-y-2.5 text-xs text-slate-600 pt-2 border-t border-slate-100">
-            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Up to 3 active document projects</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Citation indexing & TOC builder</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Formatted document draft previews</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <span data-i18n="card1_f1">Up to 3 active document projects</span></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <span data-i18n="card1_f2">Citation indexing & TOC builder</span></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <span data-i18n="card1_f3">Formatted document draft previews</span></li>
           </ul>
         </div>
         <div class="pt-6">
-          <button onclick="openPaddleCheckout(currentProPriceId)" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow-xs">
+          <button onclick="openPaddleCheckout(currentProPriceId)" data-i18n="card1_btn" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow-xs">
             Subscribe Starter
           </button>
         </div>
@@ -97,30 +113,30 @@
       <!-- Card 2: Pro / Single-Project Pass -->
       <div class="rounded-2xl border-2 border-emerald-500 bg-white p-6 shadow-lg flex flex-col justify-between relative ring-2 ring-emerald-500/20">
         <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[10.5px] font-extrabold uppercase px-3 py-0.5 rounded-full tracking-wider shadow-xs">
-          ★ Most Popular for Authors
+          <span data-i18n="card2_banner">★ Most Popular for Authors</span>
         </div>
         <div class="space-y-4">
           <div>
-            <span class="text-xs font-mono font-bold text-emerald-600">PRO FLAGSHIP</span>
-            <h3 class="text-lg font-bold text-slate-900">🌟 Single-Project Pass</h3>
-            <p class="text-xs text-slate-500 mt-1">End-to-end document compilation and PDF export for 1 primary project.</p>
+            <span data-i18n="card2_tier" class="text-xs font-mono font-bold text-emerald-600">PRO FLAGSHIP</span>
+            <h3 data-i18n="card2_title" class="text-lg font-bold text-slate-900">🌟 Single-Project Pass</h3>
+            <p data-i18n="card2_desc" class="text-xs text-slate-500 mt-1">End-to-end document compilation and PDF export for 1 primary project.</p>
           </div>
           <div class="pt-2 border-t border-slate-100">
             <div class="flex items-baseline gap-1">
               <span class="text-3xl font-black text-slate-900 font-mono">$699</span>
-              <span class="text-xs text-slate-500 font-medium">One-time</span>
+              <span data-i18n="card2_period" class="text-xs text-slate-500 font-medium">One-time</span>
             </div>
-            <p class="text-[11px] text-emerald-600 font-semibold mt-1">Instant digital license provisioning</p>
+            <p data-i18n="card2_sub" class="text-[11px] text-emerald-600 font-semibold mt-1">Instant digital license provisioning</p>
           </div>
           <ul class="space-y-2.5 text-xs text-slate-600 pt-2 border-t border-slate-100">
-            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Unlimited document compilation & updates</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> High-resolution vector PDF export</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Automatic pagination & bookmarking</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Lifetime license for 1 project scope</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <span data-i18n="card2_f1">Unlimited document compilation & updates</span></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <span data-i18n="card2_f2">High-resolution vector PDF export</span></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <span data-i18n="card2_f3">Automatic pagination & bookmarking</span></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <span data-i18n="card2_f4">Lifetime license for 1 project scope</span></li>
           </ul>
         </div>
         <div class="pt-6">
-          <button onclick="openPaddleCheckout('pri_01m62yxa4ymwd403hmzstq3a38')" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition shadow-md">
+          <button onclick="openPaddleCheckout('pri_01m62yxa4ymwd403hmzstq3a38')" data-i18n="card2_btn" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition shadow-md">
             Get Lifetime Pass
           </button>
         </div>
@@ -130,26 +146,26 @@
       <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs flex flex-col justify-between hover:shadow-md transition">
         <div class="space-y-4">
           <div>
-            <span class="text-xs font-mono font-bold text-slate-400">ORGANIZATION</span>
-            <h3 class="text-lg font-bold text-slate-900">👥 Team Studio</h3>
-            <p class="text-xs text-slate-500 mt-1">Multi-user collaborative workbench for professional documentation teams.</p>
+            <span data-i18n="card3_tier" class="text-xs font-mono font-bold text-slate-400">ORGANIZATION</span>
+            <h3 data-i18n="card3_title" class="text-lg font-bold text-slate-900">👥 Team Studio</h3>
+            <p data-i18n="card3_desc" class="text-xs text-slate-500 mt-1">Multi-user collaborative workbench for professional documentation teams.</p>
           </div>
           <div class="pt-2 border-t border-slate-100">
             <div class="flex items-baseline gap-1">
               <span id="price-firm" class="text-3xl font-black text-slate-900 font-mono">$1,390</span>
-              <span id="period-firm" class="text-xs text-slate-500 font-medium">/quarter</span>
+              <span id="period-firm" data-i18n="card3_period_qu" class="text-xs text-slate-500 font-medium">/quarter</span>
             </div>
-            <p class="text-[11px] text-slate-500 font-semibold mt-1">Includes 5 Seats & 50 Active Projects</p>
+            <p data-i18n="card3_sub" class="text-[11px] text-slate-500 font-semibold mt-1">Includes 5 Seats & 50 Active Projects</p>
           </div>
           <ul class="space-y-2.5 text-xs text-slate-600 pt-2 border-t border-slate-100">
-            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> 5 Concurrent team/collaborator seats</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> 50 Active documentation projects</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Encrypted cloud project storage isolation</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Priority email technical support</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <span data-i18n="card3_f1">5 Concurrent team/collaborator seats</span></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <span data-i18n="card3_f2">50 Active documentation projects</span></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <span data-i18n="card3_f3">Encrypted cloud project storage isolation</span></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> <span data-i18n="card3_f4">Priority email technical support</span></li>
           </ul>
         </div>
         <div class="pt-6">
-          <button onclick="openPaddleCheckout(currentFirmPriceId)" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow-xs">
+          <button onclick="openPaddleCheckout(currentFirmPriceId)" data-i18n="card3_btn" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow-xs">
             Subscribe Team
           </button>
         </div>
@@ -159,22 +175,22 @@
       <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs flex flex-col justify-between">
         <div class="space-y-4">
           <div>
-            <span class="text-xs font-mono font-bold text-slate-400">ENTERPRISE</span>
-            <h3 class="text-lg font-bold text-slate-900">🏢 Enterprise Custom</h3>
-            <p class="text-xs text-slate-500 mt-1">Custom corporate contract with enterprise SLAs and invoicing.</p>
+            <span data-i18n="card4_tier" class="text-xs font-mono font-bold text-slate-400">ENTERPRISE</span>
+            <h3 data-i18n="card4_title" class="text-lg font-bold text-slate-900">🏢 Enterprise Custom</h3>
+            <p data-i18n="card4_desc" class="text-xs text-slate-500 mt-1">Custom corporate contract with enterprise SLAs and invoicing.</p>
           </div>
           <div class="pt-2 border-t border-slate-200">
-            <div class="text-2xl font-black text-slate-900">Contact Sales</div>
-            <p class="text-[11px] text-slate-500 font-medium mt-1">Custom Quotas & Procurement</p>
+            <div data-i18n="card4_price" class="text-2xl font-black text-slate-900">Contact Sales</div>
+            <p data-i18n="card4_sub" class="text-[11px] text-slate-500 font-medium mt-1">Custom Quotas & Procurement</p>
           </div>
           <ul class="space-y-2.5 text-xs text-slate-600 pt-2 border-t border-slate-200">
-            <li class="flex items-center gap-2"><span class="text-slate-400 font-bold">✓</span> Unlimited custom user seats</li>
-            <li class="flex items-center gap-2"><span class="text-slate-400 font-bold">✓</span> Corporate software license & evaluation agreements</li>
-            <li class="flex items-center gap-2"><span class="text-slate-400 font-bold">✓</span> Direct corporate wire bank transfers</li>
+            <li class="flex items-center gap-2"><span class="text-slate-400 font-bold">✓</span> <span data-i18n="card4_f1">Unlimited custom user seats</span></li>
+            <li class="flex items-center gap-2"><span class="text-slate-400 font-bold">✓</span> <span data-i18n="card4_f2">Corporate software license & evaluation agreements</span></li>
+            <li class="flex items-center gap-2"><span class="text-slate-400 font-bold">✓</span> <span data-i18n="card4_f3">Direct corporate wire bank transfers</span></li>
           </ul>
         </div>
         <div class="pt-6">
-          <a href="mailto:wizardor@gmail.com?subject=PMS%20Enterprise%20Documentation%20Inquiry" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs flex items-center justify-center transition shadow-xs">
+          <a href="mailto:wizardor@gmail.com?subject=PMS%20Enterprise%20Documentation%20Inquiry" data-i18n="card4_btn" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs flex items-center justify-center transition shadow-xs">
             Contact Sales
           </a>
         </div>
@@ -193,22 +209,48 @@
       </button>
     </div>
 
+    <!-- Guarantees Row -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 pt-8 border-t border-slate-200 text-slate-600">
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-sm shrink-0">⚡</div>
+        <div class="space-y-1">
+          <h5 data-i18n="guar1_title" class="font-bold text-slate-900 text-xs">Instant Digital Delivery</h5>
+          <p data-i18n="guar1_desc" class="text-[11px] leading-relaxed">License keys and compute resource quotas are provisioned automatically within seconds of completed checkout.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center font-bold text-sm shrink-0">💎</div>
+        <div class="space-y-1">
+          <h5 data-i18n="guar2_title" class="font-bold text-slate-900 text-xs">100% Pro Payment Credit</h5>
+          <p data-i18n="guar2_desc" class="text-[11px] leading-relaxed">100% of accumulated Pro subscription payments are credited towards the purchase of a Lifetime Pass at any time.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-800 flex items-center justify-center font-bold text-sm shrink-0">🛡️</div>
+        <div class="space-y-1">
+          <h5 data-i18n="guar3_title" class="font-bold text-slate-900 text-xs">Read-Only Asset Custody</h5>
+          <p data-i18n="guar3_desc" class="text-[11px] leading-relaxed">If your subscription expires, all previously compiled documents and PDF assets remain permanently available to view and download.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- Legal Footer for Paddle Underwriting -->
     <footer class="mt-20 pt-8 border-t border-slate-200 text-xs text-slate-500 space-y-4">
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
-          <p>© 2026 PMS Software Studio. All rights reserved.</p>
-          <p class="mt-0.5">Contact Support: <a href="mailto:wizardor@gmail.com" class="text-emerald-700 underline font-semibold">wizardor@gmail.com</a></p>
+          <p data-i18n="footer_rights">© 2026 PMS Software Studio. All rights reserved.</p>
+          <p class="mt-0.5"><span data-i18n="footer_support">Contact Support:</span> <a href="mailto:wizardor@gmail.com" class="text-emerald-700 underline font-semibold">wizardor@gmail.com</a></p>
         </div>
         <div class="flex items-center gap-6 font-semibold text-slate-700">
-          <a href="index.html" class="hover:text-emerald-600">Home</a>
-          <a href="terms.html" class="hover:text-emerald-600">Terms of Service</a>
-          <a href="privacy.html" class="hover:text-emerald-600">Privacy Policy</a>
-          <a href="refund.html" class="hover:text-emerald-600">Refund Policy</a>
+          <a href="index.html" data-i18n="nav_overview" class="hover:text-emerald-600">Home</a>
+          <a href="pricing.html" data-i18n="nav_pricing" class="hover:text-emerald-600">Pricing</a>
+          <a href="terms.html" data-i18n="nav_terms" class="hover:text-emerald-600">Terms of Service</a>
+          <a href="privacy.html" data-i18n="nav_privacy" class="hover:text-emerald-600">Privacy Policy</a>
+          <a href="refund.html" data-i18n="nav_refunds" class="hover:text-emerald-600">Refund Policy</a>
         </div>
       </div>
       <div class="bg-slate-100 p-4 rounded-xl text-[11px] leading-relaxed text-slate-500 space-y-1">
-        <p><strong>Merchant of Record Disclosure:</strong> Payments and order fulfillment are processed securely by our Merchant of Record, <strong>Paddle.com Market Ltd</strong> or <strong>Paddle Payments Ltd</strong>. Paddle handles international sales tax, VAT, and global payment compliance.</p>
+        <p><strong data-i18n="footer_mor_title">Merchant of Record Disclosure:</strong> <span data-i18n="footer_mor_desc">Payments and order fulfillment are processed securely by our Merchant of Record, Paddle.com Market Ltd or Paddle Payments Ltd. Paddle handles international sales tax, VAT, and global payment compliance.</span></p>
       </div>
     </footer>
   </main>
@@ -227,10 +269,21 @@
       }
     };
 
+    let currentCycle = "quarterly";
     let currentProPriceId = priceIds.pro.quarterly;
     let currentFirmPriceId = priceIds.firm.quarterly;
 
+    function getPeriodSuffix(cycle) {
+      const curLang = localStorage.getItem('pms_site_lang') || 'en';
+      const dict = (typeof PMS_TRANSLATIONS !== 'undefined' && PMS_TRANSLATIONS[curLang]) ? PMS_TRANSLATIONS[curLang] : null;
+      if (!dict) {
+        return cycle === 'monthly' ? '/month' : cycle === 'yearly' ? '/year' : '/quarter';
+      }
+      return cycle === 'monthly' ? dict.card1_period_mo : cycle === 'yearly' ? dict.card1_period_yr : dict.card1_period_qu;
+    }
+
     function switchCycle(cycle) {
+      currentCycle = cycle;
       const btnM = document.getElementById("btn-monthly");
       const btnQ = document.getElementById("btn-quarterly");
       const btnY = document.getElementById("btn-yearly");
@@ -241,58 +294,75 @@
 
       const activeClass = "px-4 py-2 rounded-lg transition bg-white text-emerald-700 shadow-xs flex items-center gap-1 font-bold";
 
+      const suffix = getPeriodSuffix(cycle);
+
       if (cycle === "monthly") {
         btnM.className = activeClass;
         document.getElementById("price-pro").innerText = "$79";
-        document.getElementById("period-pro").innerText = "/month";
+        document.getElementById("period-pro").innerText = suffix;
         document.getElementById("price-firm").innerText = "$499";
-        document.getElementById("period-firm").innerText = "/month";
+        document.getElementById("period-firm").innerText = suffix;
         currentProPriceId = priceIds.pro.monthly;
         currentFirmPriceId = priceIds.firm.monthly;
       } else if (cycle === "quarterly") {
         btnQ.className = activeClass;
         document.getElementById("price-pro").innerText = "$199";
-        document.getElementById("period-pro").innerText = "/quarter";
+        document.getElementById("period-pro").innerText = suffix;
         document.getElementById("price-firm").innerText = "$1,390";
-        document.getElementById("period-firm").innerText = "/quarter";
+        document.getElementById("period-firm").innerText = suffix;
         currentProPriceId = priceIds.pro.quarterly;
         currentFirmPriceId = priceIds.firm.quarterly;
       } else if (cycle === "yearly") {
         btnY.className = activeClass;
         document.getElementById("price-pro").innerText = "$690";
-        document.getElementById("period-pro").innerText = "/year";
+        document.getElementById("period-pro").innerText = suffix;
         document.getElementById("price-firm").innerText = "$4,990";
-        document.getElementById("period-firm").innerText = "/year";
+        document.getElementById("period-firm").innerText = suffix;
         currentProPriceId = priceIds.pro.yearly;
         currentFirmPriceId = priceIds.firm.yearly;
       }
     }
 
-    const PADDLE_CLIENT_TOKEN = "live_9b85863a29b9a994359f3ce7d36";
+    // Intercept setLang to refresh period suffix
+    const originalSetLang = window.setLang;
+    window.setLang = function(lang) {
+      if (typeof originalSetLang === 'function') {
+        originalSetLang(lang);
+      }
+      switchCycle(currentCycle);
+    };
 
-    if (window.Paddle) {
+    // Initialize Paddle.js v2 SDK (Production Live Environment)
+    try {
+      Paddle.Environment.set("production");
       Paddle.Initialize({
-        token: PADDLE_CLIENT_TOKEN,
+        token: "live_9b85863a29b9a994359f3ce7d36",
         eventCallback: function(data) {
-          if (data.name === "checkout.completed") {
-            window.location.href = window.location.origin + "/welcome.html";
-          }
+          console.log("[Paddle Event]", data);
         }
       });
+      console.log("[Paddle] Initialized successfully with live token.");
+    } catch (e) {
+      console.error("[Paddle] Initialization error:", e);
     }
 
     function openPaddleCheckout(priceId) {
-      if (window.Paddle && window.Paddle.Checkout) {
+      if (!priceId) {
+        alert("Please select a valid pricing tier.");
+        return;
+      }
+      try {
         Paddle.Checkout.open({
+          items: [{ priceId: priceId, quantity: 1 }],
           settings: {
             displayMode: "overlay",
             theme: "light",
-            variant: "one-page"
-          },
-          items: [{ priceId: priceId, quantity: 1 }]
+            locale: (localStorage.getItem('pms_site_lang') || 'en')
+          }
         });
-      } else {
-        window.open("https://buy.paddle.com/checkout?price_id=" + priceId, "_blank");
+      } catch (err) {
+        console.error("Failed to open Paddle Checkout:", err);
+        window.location.href = `https://buy.paddle.com/checkout?price_id=${priceId}`;
       }
     }
   </script>
