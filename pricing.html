@@ -533,48 +533,33 @@
       } catch (_) {}
     }
 
-    // Track 2: Official Paddle.PricePreview() Live Catalog Sync (100% via Paddle public client token)
-    function syncLivePricingFromPaddlePreview() {
-      if (typeof window.Paddle === "undefined" || typeof window.Paddle.PricePreview !== "function") {
-        return;
-      }
+    // Track 2: Same-Origin Static JSON Price Sync (./pricing-live.json)
+    // Zero cross-origin requests to api.paddle.com on page load, zero backend credential exposure
+    function syncLivePricingFromSameOriginJson() {
       try {
-        const ctx = getUrlCheckoutContext();
-        const previewParams = {
-          items: [
-            { priceId: priceIds.pro.monthly, quantity: 1 },
-            { priceId: priceIds.pro.quarterly, quantity: 1 },
-            { priceId: priceIds.pro.yearly, quantity: 1 },
-            { priceId: priceIds.lifetime, quantity: 1 },
-            { priceId: priceIds.dual, quantity: 1 },
-            { priceId: priceIds.firm.monthly, quantity: 1 },
-            { priceId: priceIds.firm.quarterly, quantity: 1 },
-            { priceId: priceIds.firm.yearly, quantity: 1 }
-          ]
-        };
-        if (ctx.discountCode) {
-          previewParams.discountCode = ctx.discountCode;
-        }
-        window.Paddle.PricePreview(previewParams)
+        fetch("./pricing-live.json?t=" + Math.floor(Date.now() / 60000), { cache: "no-store" })
           .then(function(res) {
-            const lineItems = res && res.data && res.data.details && res.data.details.lineItems;
-            if (!Array.isArray(lineItems)) return;
-            lineItems.forEach(function(item) {
-              const pid = item && item.price && item.price.id;
-              const rawTotal = item && item.totals && (item.totals.total || item.totals.subtotal);
-              if (!pid || !rawTotal) return;
-              const usdVal = Math.round(parseFloat(rawTotal) / 100);
-              if (!usdVal || usdVal <= 0) return;
+            if (!res.ok) return null;
+            return res.json();
+          })
+          .then(function(data) {
+            if (!data || typeof data !== "object") return;
+            // Only apply if URL snapshot (?pms_prices=) did not already override
+            const params = new URLSearchParams(window.location.search);
+            if (params.get("pms_prices")) return;
 
-              if (pid === priceIds.pro.monthly) priceAmounts.pro.monthly = usdVal;
-              else if (pid === priceIds.pro.quarterly) priceAmounts.pro.quarterly = usdVal;
-              else if (pid === priceIds.pro.yearly) priceAmounts.pro.yearly = usdVal;
-              else if (pid === priceIds.lifetime) priceAmounts.lifetime = usdVal;
-              else if (pid === priceIds.dual) priceAmounts.dual = usdVal;
-              else if (pid === priceIds.firm.monthly) priceAmounts.firm.monthly = usdVal;
-              else if (pid === priceIds.firm.quarterly) priceAmounts.firm.quarterly = usdVal;
-              else if (pid === priceIds.firm.yearly) priceAmounts.firm.yearly = usdVal;
-            });
+            if (data.pro) {
+              if (Number(data.pro.monthly) > 0) priceAmounts.pro.monthly = Number(data.pro.monthly);
+              if (Number(data.pro.quarterly) > 0) priceAmounts.pro.quarterly = Number(data.pro.quarterly);
+              if (Number(data.pro.yearly) > 0) priceAmounts.pro.yearly = Number(data.pro.yearly);
+            }
+            if (Number(data.lifetime) > 0) priceAmounts.lifetime = Number(data.lifetime);
+            if (Number(data.dual) > 0) priceAmounts.dual = Number(data.dual);
+            if (data.firm) {
+              if (Number(data.firm.monthly) > 0) priceAmounts.firm.monthly = Number(data.firm.monthly);
+              if (Number(data.firm.quarterly) > 0) priceAmounts.firm.quarterly = Number(data.firm.quarterly);
+              if (Number(data.firm.yearly) > 0) priceAmounts.firm.yearly = Number(data.firm.yearly);
+            }
             switchCycle(currentCycle);
           })
           .catch(function() {});
@@ -593,6 +578,48 @@
 
     // Initialize Paddle.js v2 SDK (Production Live Environment) with Dual-Track Resilient Loader
     let isPaddleInitialized = false;
+    let isPaddleCheckoutLoaded = false;
+    let paddleWatchdogTimer = null;
+
+    function clearPaddleWatchdog() {
+      if (paddleWatchdogTimer) {
+        clearTimeout(paddleWatchdogTimer);
+        paddleWatchdogTimer = null;
+      }
+    }
+
+    function showPaddleNetworkDiagnosticModal() {
+      const existing = document.getElementById("pms-paddle-net-modal");
+      if (existing) existing.remove();
+      const lang = (localStorage.getItem("pms_site_lang") || "zh").trim();
+      const isZh = lang.startsWith("zh");
+      const wrap = document.createElement("div");
+      wrap.id = "pms-paddle-net-modal";
+      wrap.style.cssText = "position:fixed;inset:0;z-index:2147483647;background:rgba(15,23,42,0.65);display:flex;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;";
+      wrap.innerHTML = '<div style="background:#fff;border-radius:16px;max-width:480px;width:100%;padding:24px;box-shadow:0 20px 40px rgba(0,0,0,0.25);border:1px solid #e2e8f0;">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">' +
+          '<h3 style="margin:0;font-size:17px;font-weight:700;color:#0f172a;">' + (isZh ? '⚠️ Paddle 国际收银台连接受阻' : '⚠️ Paddle Checkout Connection Blocked') + '</h3>' +
+          '<button id="pms-paddle-net-close" style="background:none;border:none;font-size:20px;cursor:pointer;color:#64748b;">×</button>' +
+        '</div>' +
+        '<p style="margin:0 0 12px;font-size:13.5px;line-height:1.6;color:#334155;">' +
+          (isZh
+            ? '当前页面本地脚本已成功加载，但浏览器连接 Paddle 官方支付网关（<code>*.paddle.com</code>）时触发了证书/DNS 拦截（<code>ERR_CERT_COMMON_NAME_INVALID</code>）。'
+            : 'The local SDK initialized, but your network blocked connections to <code>*.paddle.com</code> (<code>ERR_CERT_COMMON_NAME_INVALID</code>).') +
+        '</p>' +
+        '<div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:10px;padding:12px;font-size:12.5px;color:#1e293b;line-height:1.6;margin-bottom:16px;">' +
+          (isZh
+            ? '<strong>💡 1 秒解决方法（SwitchyOmega / Clash / 代理插件）：</strong><br/>1. 点击浏览器右上角的代理插件图标（如 SwitchyOmega）；<br/>2. 将当前页面的 <code>*.paddle.com</code>（包含 <code>buy.paddle.com</code> 与 <code>api.paddle.com</code>）从「直接连接」切换为「代理连接」；<br/>3. 重新点击订阅按钮即可秒开收银台。'
+            : '<strong>💡 Quick Fix:</strong> Add <code>*.paddle.com</code> (<code>buy.paddle.com</code> & <code>api.paddle.com</code>) to your proxy rules or enable global proxy mode, then click Subscribe again.') +
+        '</div>' +
+        '<div style="display:flex;justify-content:flex-end;gap:10px;">' +
+          '<button id="pms-paddle-net-ok" style="background:#0f172a;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:600;cursor:pointer;">' + (isZh ? '我知道了' : 'Got it') + '</button>' +
+        '</div>' +
+      '</div>';
+      document.body.appendChild(wrap);
+      const closeFn = function() { wrap.remove(); };
+      document.getElementById("pms-paddle-net-close").onclick = closeFn;
+      document.getElementById("pms-paddle-net-ok").onclick = closeFn;
+    }
 
     function initPaddleSdk() {
       if (isPaddleInitialized) return true;
@@ -603,6 +630,14 @@
           token: "live_9b85863a29b9a994359f3ce7d36",
           eventCallback: function(data) {
             console.log("[Paddle Event]", data);
+            if (data && data.name) {
+              if (data.name.indexOf("checkout.loaded") !== -1 || data.name.indexOf("checkout.completed") !== -1) {
+                isPaddleCheckoutLoaded = true;
+                clearPaddleWatchdog();
+              } else if (data.name.indexOf("checkout.closed") !== -1 || data.name.indexOf("checkout.error") !== -1 || data.name.indexOf("checkout.failed") !== -1) {
+                clearPaddleWatchdog();
+              }
+            }
           }
         });
         isPaddleInitialized = true;
@@ -712,6 +747,20 @@
           if (Object.keys(ctx.customData).length > 0) {
             checkoutPayload.customData = ctx.customData;
           }
+          isPaddleCheckoutLoaded = false;
+          clearPaddleWatchdog();
+          paddleWatchdogTimer = setTimeout(function() {
+            if (!isPaddleCheckoutLoaded) {
+              try {
+                if (window.Paddle && window.Paddle.Checkout && typeof window.Paddle.Checkout.close === "function") {
+                  window.Paddle.Checkout.close();
+                } else if (window.Paddle && window.Paddle.Spinner && typeof window.Paddle.Spinner.hide === "function") {
+                  window.Paddle.Spinner.hide();
+                }
+              } catch (_) {}
+              showPaddleNetworkDiagnosticModal();
+            }
+          }, 6000);
           window.Paddle.Checkout.open(checkoutPayload);
         } catch (err) {
           console.error("Failed to open Paddle Checkout:", err);
@@ -719,12 +768,10 @@
       });
     }
 
-    // Auto-sync language, live prices (URL snapshot + Paddle.PricePreview), cycle tab, target card focus, and trigger Paddle Overlay Checkout
+    // Auto-sync language, live prices (URL snapshot + same-origin ./pricing-live.json), cycle tab, target card focus, and trigger Paddle Overlay Checkout
     window.addEventListener("DOMContentLoaded", function() {
       applyUrlPriceSnapshot();
-      ensurePaddleReady(function() {
-        syncLivePricingFromPaddlePreview();
-      });
+      syncLivePricingFromSameOriginJson();
 
       const ctx = getUrlCheckoutContext();
       if (ctx.lang && typeof window.setLang === "function") {

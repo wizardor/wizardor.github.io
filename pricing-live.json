@@ -1,0 +1,16 @@
+{
+  "updatedAt": "2026-11-01T19:50:00Z",
+  "activeGateway": "paddle",
+  "pro": {
+    "monthly": 79,
+    "quarterly": 199,
+    "yearly": 690
+  },
+  "lifetime": 699,
+  "dual": 999,
+  "firm": {
+    "monthly": 499,
+    "quarterly": 1390,
+    "yearly": 4990
+  }
+}
