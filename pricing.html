@@ -80,7 +80,7 @@
     </div>
 
     <!-- Pricing Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 items-stretch">
 
       <!-- Card 1: Starter / Pro Studio -->
       <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs flex flex-col justify-between hover:shadow-md transition">
@@ -111,8 +111,8 @@
       </div>
 
       <!-- Card 2: Pro / Single-Project Pass -->
-      <div class="rounded-2xl border-2 border-emerald-500 bg-white p-6 shadow-lg flex flex-col justify-between relative ring-2 ring-emerald-500/20">
-        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[10.5px] font-extrabold uppercase px-3 py-0.5 rounded-full tracking-wider shadow-xs">
+      <div class="rounded-2xl border-2 border-emerald-500 bg-white p-6 pt-7 shadow-lg flex flex-col justify-between relative ring-2 ring-emerald-500/20">
+        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap z-10 bg-emerald-600 text-white text-[10.5px] font-extrabold uppercase px-3.5 py-0.5 rounded-full tracking-wider shadow-xs">
           <span data-i18n="card2_banner">★ Most Popular for Authors</span>
         </div>
         <div class="space-y-4">
@@ -346,25 +346,87 @@
       console.error("[Paddle] Initialization error:", e);
     }
 
+    function resolvePaddleLocale(siteLang) {
+      const map = {
+        "zh": "zh-Hans",
+        "zh-TW": "zh-Hant",
+        "en": "en",
+        "es": "es",
+        "ja": "ja",
+        "ko": "ko"
+      };
+      return map[siteLang] || "en";
+    }
+
+    function getUrlCheckoutContext() {
+      const params = new URLSearchParams(window.location.search);
+      const lang = (params.get("lang") || localStorage.getItem("pms_site_lang") || "en").trim();
+      const email = (params.get("prefilled_email") || params.get("checkout[email]") || params.get("email") || "").trim();
+      const discountCode = (params.get("checkout[discount_code]") || params.get("discount_code") || "").trim();
+      const customData = {};
+      const uid = params.get("checkout[custom][uid]") || params.get("uid");
+      const proCredit = params.get("checkout[custom][pro_credit_usd]");
+      const upgradeKey = params.get("checkout[custom][upgrade_from_key]");
+      const pricingVer = params.get("checkout[custom][pricing_version]");
+      const campaignName = params.get("checkout[custom][campaign_name]");
+      if (uid) customData.uid = uid;
+      if (proCredit) customData.pro_credit_usd = proCredit;
+      if (upgradeKey) customData.upgrade_from_key = upgradeKey;
+      if (pricingVer) customData.pricing_version = pricingVer;
+      if (campaignName) customData.campaign_name = campaignName;
+      const priceId = (params.get("price_id") || params.get("priceId") || "").trim();
+      return { priceId, lang, email, discountCode, customData };
+    }
+
     function openPaddleCheckout(priceId) {
       if (!priceId) {
         alert("Please select a valid pricing tier.");
         return;
       }
       try {
-        Paddle.Checkout.open({
+        const ctx = getUrlCheckoutContext();
+        const checkoutPayload = {
           items: [{ priceId: priceId, quantity: 1 }],
           settings: {
             displayMode: "overlay",
             theme: "light",
-            locale: (localStorage.getItem('pms_site_lang') || 'en')
+            locale: resolvePaddleLocale(ctx.lang)
           }
-        });
+        };
+        if (ctx.email && ctx.email.includes("@")) {
+          checkoutPayload.customer = { email: ctx.email };
+        }
+        if (ctx.discountCode) {
+          checkoutPayload.discountCode = ctx.discountCode;
+        }
+        if (Object.keys(ctx.customData).length > 0) {
+          checkoutPayload.customData = ctx.customData;
+        }
+        Paddle.Checkout.open(checkoutPayload);
       } catch (err) {
         console.error("Failed to open Paddle Checkout:", err);
-        window.location.href = `https://buy.paddle.com/checkout?price_id=${priceId}`;
       }
     }
+
+    // Auto-sync language, cycle tab, and trigger Paddle Overlay Checkout when redirected from PMS Chrome Extension
+    window.addEventListener("DOMContentLoaded", function() {
+      const ctx = getUrlCheckoutContext();
+      if (ctx.lang && typeof window.setLang === "function") {
+        window.setLang(ctx.lang);
+      }
+      if (ctx.priceId === priceIds.pro.monthly || ctx.priceId === priceIds.firm.monthly) {
+        switchCycle("monthly");
+      } else if (ctx.priceId === priceIds.pro.yearly || ctx.priceId === priceIds.firm.yearly) {
+        switchCycle("yearly");
+      } else if (ctx.priceId === priceIds.pro.quarterly || ctx.priceId === priceIds.firm.quarterly) {
+        switchCycle("quarterly");
+      }
+      if (ctx.priceId && ctx.priceId.startsWith("pri_")) {
+        setTimeout(function() {
+          openPaddleCheckout(ctx.priceId);
+        }, 180);
+      }
+    });
   </script>
 </body>
 </html>
