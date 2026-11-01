@@ -83,10 +83,13 @@
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 items-stretch">
 
       <!-- Card 1: Starter / Pro Studio -->
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+      <div id="card-pro" onclick="focusPricingCard('card-pro', false)" class="rounded-2xl border border-slate-200 bg-white p-6 pt-7 shadow-xs flex flex-col justify-between relative hover:shadow-md transition cursor-pointer">
+        <div id="badge-pro" class="hidden absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap z-10 bg-emerald-600 text-white text-[10.5px] font-extrabold uppercase px-3.5 py-0.5 rounded-full tracking-wider shadow-xs">
+          <span class="selected-plan-badge-text">★ Selected Plan</span>
+        </div>
         <div class="space-y-4">
           <div>
-            <span data-i18n="card1_tier" class="text-xs font-mono font-bold text-slate-400">STARTER</span>
+            <span id="tier-label-pro" data-i18n="card1_tier" class="text-xs font-mono font-bold text-slate-400">STARTER</span>
             <h3 data-i18n="card1_title" class="text-lg font-bold text-slate-900">⚡ Pro Studio</h3>
             <p data-i18n="card1_desc" class="text-xs text-slate-500 mt-1">Document structuring, citation concordance & draft previews.</p>
           </div>
@@ -104,20 +107,20 @@
           </ul>
         </div>
         <div class="pt-6">
-          <button onclick="openPaddleCheckout(currentProPriceId)" data-i18n="card1_btn" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow-xs">
+          <button id="btn-cta-pro" onclick="event.stopPropagation(); focusPricingCard('card-pro', false); openPaddleCheckout(currentProPriceId)" data-i18n="card1_btn" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow-xs">
             Subscribe Starter
           </button>
         </div>
       </div>
 
       <!-- Card 2: Pro / Single-Project Pass -->
-      <div class="rounded-2xl border-2 border-emerald-500 bg-white p-6 pt-7 shadow-lg flex flex-col justify-between relative ring-2 ring-emerald-500/20">
-        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap z-10 bg-emerald-600 text-white text-[10.5px] font-extrabold uppercase px-3.5 py-0.5 rounded-full tracking-wider shadow-xs">
+      <div id="card-lifetime" onclick="focusPricingCard('card-lifetime', false)" class="rounded-2xl border-2 border-emerald-500 bg-white p-6 pt-7 shadow-lg flex flex-col justify-between relative ring-2 ring-emerald-500/20 transition cursor-pointer">
+        <div id="badge-lifetime" class="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap z-10 bg-emerald-600 text-white text-[10.5px] font-extrabold uppercase px-3.5 py-0.5 rounded-full tracking-wider shadow-xs">
           <span data-i18n="card2_banner">★ Most Popular for Authors</span>
         </div>
         <div class="space-y-4">
           <div>
-            <span data-i18n="card2_tier" class="text-xs font-mono font-bold text-emerald-600">PRO FLAGSHIP</span>
+            <span id="tier-label-lifetime" data-i18n="card2_tier" class="text-xs font-mono font-bold text-emerald-600">PRO FLAGSHIP</span>
             <h3 data-i18n="card2_title" class="text-lg font-bold text-slate-900">🌟 Single-Project Pass</h3>
             <p data-i18n="card2_desc" class="text-xs text-slate-500 mt-1">End-to-end document compilation and PDF export for 1 primary project.</p>
           </div>
@@ -136,17 +139,20 @@
           </ul>
         </div>
         <div class="pt-6">
-          <button onclick="openPaddleCheckout('pri_01m62yxa4ymwd403hmzstq3a38')" data-i18n="card2_btn" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition shadow-md">
+          <button id="btn-cta-lifetime" onclick="event.stopPropagation(); focusPricingCard('card-lifetime', false); openPaddleCheckout('pri_01m62yxa4ymwd403hmzstq3a38')" data-i18n="card2_btn" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition shadow-md">
             Get Lifetime Pass
           </button>
         </div>
       </div>
 
       <!-- Card 3: Enterprise / Team Studio -->
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+      <div id="card-firm" onclick="focusPricingCard('card-firm', false)" class="rounded-2xl border border-slate-200 bg-white p-6 pt-7 shadow-xs flex flex-col justify-between relative hover:shadow-md transition cursor-pointer">
+        <div id="badge-firm" class="hidden absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap z-10 bg-emerald-600 text-white text-[10.5px] font-extrabold uppercase px-3.5 py-0.5 rounded-full tracking-wider shadow-xs">
+          <span class="selected-plan-badge-text">★ Selected Plan</span>
+        </div>
         <div class="space-y-4">
           <div>
-            <span data-i18n="card3_tier" class="text-xs font-mono font-bold text-slate-400">ORGANIZATION</span>
+            <span id="tier-label-firm" data-i18n="card3_tier" class="text-xs font-mono font-bold text-slate-400">ORGANIZATION</span>
             <h3 data-i18n="card3_title" class="text-lg font-bold text-slate-900">👥 Team Studio</h3>
             <p data-i18n="card3_desc" class="text-xs text-slate-500 mt-1">Multi-user collaborative workbench for professional documentation teams.</p>
           </div>
@@ -165,17 +171,20 @@
           </ul>
         </div>
         <div class="pt-6">
-          <button onclick="openPaddleCheckout(currentFirmPriceId)" data-i18n="card3_btn" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow-xs">
+          <button id="btn-cta-firm" onclick="event.stopPropagation(); focusPricingCard('card-firm', false); openPaddleCheckout(currentFirmPriceId)" data-i18n="card3_btn" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow-xs">
             Subscribe Team
           </button>
         </div>
       </div>
 
       <!-- Card 4: Enterprise -->
-      <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs flex flex-col justify-between">
+      <div id="card-enterprise" onclick="focusPricingCard('card-enterprise', false)" class="rounded-2xl border border-slate-200 bg-slate-50 p-6 pt-7 shadow-xs flex flex-col justify-between relative hover:shadow-md transition cursor-pointer">
+        <div id="badge-enterprise" class="hidden absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap z-10 bg-emerald-600 text-white text-[10.5px] font-extrabold uppercase px-3.5 py-0.5 rounded-full tracking-wider shadow-xs">
+          <span class="selected-plan-badge-text">★ Selected Plan</span>
+        </div>
         <div class="space-y-4">
           <div>
-            <span data-i18n="card4_tier" class="text-xs font-mono font-bold text-slate-400">ENTERPRISE</span>
+            <span id="tier-label-enterprise" data-i18n="card4_tier" class="text-xs font-mono font-bold text-slate-400">ENTERPRISE</span>
             <h3 data-i18n="card4_title" class="text-lg font-bold text-slate-900">🏢 Enterprise Custom</h3>
             <p data-i18n="card4_desc" class="text-xs text-slate-500 mt-1">Custom corporate contract with enterprise SLAs and invoicing.</p>
           </div>
@@ -190,7 +199,7 @@
           </ul>
         </div>
         <div class="pt-6">
-          <a href="mailto:wizardor@gmail.com?subject=PMS%20Enterprise%20Documentation%20Inquiry" data-i18n="card4_btn" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs flex items-center justify-center transition shadow-xs">
+          <a id="btn-cta-enterprise" onclick="event.stopPropagation(); focusPricingCard('card-enterprise', false)" href="mailto:wizardor@gmail.com?subject=PMS%20Enterprise%20Documentation%20Inquiry" data-i18n="card4_btn" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs flex items-center justify-center transition shadow-xs">
             Contact Sales
           </a>
         </div>
@@ -199,12 +208,15 @@
     </div>
 
     <!-- Dual Project Special Callout -->
-    <div class="mt-8 p-6 rounded-2xl border border-emerald-200 bg-emerald-50/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div id="card-dual" onclick="focusPricingCard('card-dual', false)" class="mt-8 p-6 rounded-2xl border border-emerald-200 bg-emerald-50/60 flex flex-col sm:flex-row items-center justify-between gap-4 relative transition cursor-pointer">
+      <div id="badge-dual" class="hidden absolute -top-3.5 left-6 whitespace-nowrap z-10 bg-emerald-600 text-white text-[10.5px] font-extrabold uppercase px-3.5 py-0.5 rounded-full tracking-wider shadow-xs">
+        <span class="selected-plan-badge-text">★ Selected Plan</span>
+      </div>
       <div class="space-y-1 text-center sm:text-left">
         <h4 data-i18n="dual_title" class="font-extrabold text-slate-900 text-sm">Managing multiple parallel project compilations?</h4>
         <p data-i18n-html="dual_desc" class="text-xs text-slate-600">Get the <strong>PMS Lifetime Dual-Project Pass</strong> for <strong>$999.00</strong> (one-time payment) with simultaneous dual-portfolio synthesis.</p>
       </div>
-      <button data-i18n="dual_btn" onclick="openPaddleCheckout('pri_01m62yz6gy95weaxyefzy8kqhc')" class="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs whitespace-nowrap shadow-xs transition">
+      <button id="btn-cta-dual" data-i18n="dual_btn" onclick="event.stopPropagation(); focusPricingCard('card-dual', false); openPaddleCheckout('pri_01m62yz6gy95weaxyefzy8kqhc')" class="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs whitespace-nowrap shadow-xs transition">
         Get Dual-Project Pass ($999)
       </button>
     </div>
@@ -272,6 +284,147 @@
     let currentCycle = "quarterly";
     let currentProPriceId = priceIds.pro.quarterly;
     let currentFirmPriceId = priceIds.firm.quarterly;
+    let currentFocusedCardId = "card-lifetime";
+
+    const SELECTED_BADGE_LABELS = {
+      "zh": "★ 当前已选方案",
+      "zh-TW": "★ 當前已選方案",
+      "en": "★ Selected Plan",
+      "es": "★ Plan Seleccionado",
+      "ja": "★ 選択中のプラン",
+      "ko": "★ 선택된 플랜"
+    };
+
+    function updateSelectedBadgeTranslations(lang) {
+      const label = SELECTED_BADGE_LABELS[lang] || SELECTED_BADGE_LABELS["en"];
+      document.querySelectorAll(".selected-plan-badge-text").forEach(function(el) {
+        el.innerText = label;
+      });
+    }
+
+    function focusPricingCard(targetCardId, shouldScroll) {
+      if (!targetCardId) return;
+      currentFocusedCardId = targetCardId;
+
+      const gridCards = [
+        { card: "card-pro", badge: "badge-pro", tier: "tier-label-pro", btn: "btn-cta-pro", bg: "bg-white" },
+        { card: "card-lifetime", badge: "badge-lifetime", tier: "tier-label-lifetime", btn: "btn-cta-lifetime", bg: "bg-white" },
+        { card: "card-firm", badge: "badge-firm", tier: "tier-label-firm", btn: "btn-cta-firm", bg: "bg-white" },
+        { card: "card-enterprise", badge: "badge-enterprise", tier: "tier-label-enterprise", btn: "btn-cta-enterprise", bg: "bg-slate-50" }
+      ];
+
+      gridCards.forEach(function(item) {
+        const cardEl = document.getElementById(item.card);
+        const badgeEl = document.getElementById(item.badge);
+        const tierEl = document.getElementById(item.tier);
+        const btnEl = document.getElementById(item.btn);
+        const isActive = item.card === targetCardId;
+
+        if (cardEl) {
+          cardEl.className = isActive
+            ? "rounded-2xl border-2 border-emerald-500 " + item.bg + " p-6 pt-7 shadow-xl flex flex-col justify-between relative ring-4 ring-emerald-500/20 transition cursor-pointer"
+            : "rounded-2xl border border-slate-200 " + item.bg + " p-6 pt-7 shadow-xs flex flex-col justify-between relative hover:shadow-md transition cursor-pointer";
+        }
+        if (badgeEl) {
+          if (isActive) {
+            badgeEl.classList.remove("hidden");
+          } else {
+            badgeEl.classList.add("hidden");
+          }
+        }
+        if (tierEl) {
+          tierEl.className = isActive
+            ? "text-xs font-mono font-bold text-emerald-600"
+            : "text-xs font-mono font-bold text-slate-400";
+        }
+        if (btnEl) {
+          if (item.card === "card-enterprise") {
+            btnEl.className = isActive
+              ? "w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center transition shadow-md"
+              : "w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs flex items-center justify-center transition shadow-xs";
+          } else {
+            btnEl.className = isActive
+              ? "w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition shadow-md"
+              : "w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition shadow-xs";
+          }
+        }
+      });
+
+      // Handle Dual-Project Pass Card (Card 5)
+      const dualCard = document.getElementById("card-dual");
+      const dualBadge = document.getElementById("badge-dual");
+      const dualBtn = document.getElementById("btn-cta-dual");
+      const isDualActive = targetCardId === "card-dual";
+      if (dualCard) {
+        dualCard.className = isDualActive
+          ? "mt-8 p-6 rounded-2xl border-2 border-emerald-500 bg-emerald-50/90 shadow-xl ring-4 ring-emerald-500/20 flex flex-col sm:flex-row items-center justify-between gap-4 relative transition cursor-pointer"
+          : "mt-8 p-6 rounded-2xl border border-emerald-200 bg-emerald-50/60 flex flex-col sm:flex-row items-center justify-between gap-4 relative transition cursor-pointer";
+      }
+      if (dualBadge) {
+        if (isDualActive) {
+          dualBadge.classList.remove("hidden");
+        } else {
+          dualBadge.classList.add("hidden");
+        }
+      }
+      if (dualBtn) {
+        dualBtn.className = isDualActive
+          ? "px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs whitespace-nowrap shadow-md ring-2 ring-emerald-500/30 transition"
+          : "px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs whitespace-nowrap shadow-xs transition";
+      }
+
+      if (shouldScroll) {
+        const targetEl = document.getElementById(targetCardId);
+        if (targetEl && typeof targetEl.scrollIntoView === "function") {
+          targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        const btnMap = {
+          "card-pro": "btn-cta-pro",
+          "card-lifetime": "btn-cta-lifetime",
+          "card-firm": "btn-cta-firm",
+          "card-enterprise": "btn-cta-enterprise",
+          "card-dual": "btn-cta-dual"
+        };
+        const activeBtn = document.getElementById(btnMap[targetCardId]);
+        if (activeBtn && typeof activeBtn.focus === "function") {
+          activeBtn.focus({ preventScroll: true });
+        }
+      }
+    }
+
+    function resolveTargetCardFromUrl(ctx) {
+      const pId = ctx.priceId;
+      const tier = (ctx.tier || "").toLowerCase();
+      if (
+        pId === priceIds.pro.monthly ||
+        pId === priceIds.pro.quarterly ||
+        pId === priceIds.pro.yearly ||
+        tier === "pro" ||
+        tier === "starter"
+      ) {
+        return "card-pro";
+      }
+      if (
+        pId === priceIds.firm.monthly ||
+        pId === priceIds.firm.quarterly ||
+        pId === priceIds.firm.yearly ||
+        tier === "firm_boutique" ||
+        tier === "firm" ||
+        tier === "team"
+      ) {
+        return "card-firm";
+      }
+      if (pId === "pri_01m62yz6gy95weaxyefzy8kqhc" || tier === "lifetime_dual" || tier === "dual") {
+        return "card-dual";
+      }
+      if (tier === "enterprise" || tier === "firm_midsized") {
+        return "card-enterprise";
+      }
+      if (pId === "pri_01m62yxa4ymwd403hmzstq3a38" || tier === "lifetime" || tier === "single") {
+        return "card-lifetime";
+      }
+      return null;
+    }
 
     function getPeriodSuffix(cycle) {
       const curLang = localStorage.getItem('pms_site_lang') || 'en';
@@ -323,12 +476,13 @@
       }
     }
 
-    // Intercept setLang to refresh period suffix
+    // Intercept setLang to refresh period suffix & selected badge
     const originalSetLang = window.setLang;
     window.setLang = function(lang) {
       if (typeof originalSetLang === 'function') {
         originalSetLang(lang);
       }
+      updateSelectedBadgeTranslations(lang);
       switchCycle(currentCycle);
     };
 
@@ -348,8 +502,8 @@
 
     function resolvePaddleLocale(siteLang) {
       const map = {
-        "zh": "zh-Hans",
-        "zh-TW": "zh-Hant",
+        "zh": "zh",
+        "zh-TW": "zh-TW",
         "en": "en",
         "es": "es",
         "ja": "ja",
@@ -361,6 +515,8 @@
     function getUrlCheckoutContext() {
       const params = new URLSearchParams(window.location.search);
       const lang = (params.get("lang") || localStorage.getItem("pms_site_lang") || "en").trim();
+      const tier = (params.get("tier") || "").trim();
+      const cycle = (params.get("cycle") || "").trim();
       const email = (params.get("prefilled_email") || params.get("checkout[email]") || params.get("email") || "").trim();
       const discountCode = (params.get("checkout[discount_code]") || params.get("discount_code") || "").trim();
       const customData = {};
@@ -375,7 +531,7 @@
       if (pricingVer) customData.pricing_version = pricingVer;
       if (campaignName) customData.campaign_name = campaignName;
       const priceId = (params.get("price_id") || params.get("priceId") || "").trim();
-      return { priceId, lang, email, discountCode, customData };
+      return { priceId, tier, cycle, lang, email, discountCode, customData };
     }
 
     function openPaddleCheckout(priceId) {
@@ -408,19 +564,43 @@
       }
     }
 
-    // Auto-sync language, cycle tab, and trigger Paddle Overlay Checkout when redirected from PMS Chrome Extension
+    // Auto-sync language, cycle tab, target card focus, and trigger Paddle Overlay Checkout when redirected from PMS Chrome Extension
     window.addEventListener("DOMContentLoaded", function() {
       const ctx = getUrlCheckoutContext();
       if (ctx.lang && typeof window.setLang === "function") {
         window.setLang(ctx.lang);
+      } else {
+        updateSelectedBadgeTranslations(ctx.lang || "en");
       }
-      if (ctx.priceId === priceIds.pro.monthly || ctx.priceId === priceIds.firm.monthly) {
+
+      if (
+        ctx.priceId === priceIds.pro.monthly ||
+        ctx.priceId === priceIds.firm.monthly ||
+        ctx.cycle === "month" ||
+        ctx.cycle === "monthly"
+      ) {
         switchCycle("monthly");
-      } else if (ctx.priceId === priceIds.pro.yearly || ctx.priceId === priceIds.firm.yearly) {
+      } else if (
+        ctx.priceId === priceIds.pro.yearly ||
+        ctx.priceId === priceIds.firm.yearly ||
+        ctx.cycle === "year" ||
+        ctx.cycle === "yearly"
+      ) {
         switchCycle("yearly");
-      } else if (ctx.priceId === priceIds.pro.quarterly || ctx.priceId === priceIds.firm.quarterly) {
+      } else if (
+        ctx.priceId === priceIds.pro.quarterly ||
+        ctx.priceId === priceIds.firm.quarterly ||
+        ctx.cycle === "quarter" ||
+        ctx.cycle === "quarterly"
+      ) {
         switchCycle("quarterly");
       }
+
+      const targetCardId = resolveTargetCardFromUrl(ctx);
+      if (targetCardId) {
+        focusPricingCard(targetCardId, true);
+      }
+
       if (ctx.priceId && ctx.priceId.startsWith("pri_")) {
         setTimeout(function() {
           openPaddleCheckout(ctx.priceId);
