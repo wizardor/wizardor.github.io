@@ -4,9 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pricing & Plans | PMS - Document & Citation Formatting Workbench</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Paddle.js v2 SDK -->
-  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <link rel="stylesheet" href="site-tailwind.css" />
+  <!-- Paddle.js v2 SDK (Same-Origin Local Mirror + Official CDN Dual-Track Fallback) -->
+  <link rel="stylesheet" href="paddle-v2.css" />
+  <script src="paddle-v2.js"></script>
+  <script>
+    if (typeof window.Paddle === "undefined") {
+      document.write('<script src="https://cdn.paddle.com/paddle/v2/paddle.js"><\/script>');
+    }
+  </script>
   <!-- Multilingual i18n Engine -->
   <script src="i18n.js"></script>
 </head>
@@ -126,7 +132,7 @@
           </div>
           <div class="pt-2 border-t border-slate-100">
             <div class="flex items-baseline gap-1">
-              <span class="text-3xl font-black text-slate-900 font-mono">$699</span>
+              <span id="price-lifetime" class="text-3xl font-black text-slate-900 font-mono">$699</span>
               <span data-i18n="card2_period" class="text-xs text-slate-500 font-medium">One-time</span>
             </div>
             <p data-i18n="card2_sub" class="text-[11px] text-emerald-600 font-semibold mt-1">Instant digital license provisioning</p>
@@ -139,7 +145,7 @@
           </ul>
         </div>
         <div class="pt-6">
-          <button id="btn-cta-lifetime" onclick="event.stopPropagation(); focusPricingCard('card-lifetime', false); openPaddleCheckout('pri_01m62yxa4ymwd403hmzstq3a38')" data-i18n="card2_btn" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition shadow-md">
+          <button id="btn-cta-lifetime" onclick="event.stopPropagation(); focusPricingCard('card-lifetime', false); openPaddleCheckout(priceIds.lifetime)" data-i18n="card2_btn" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition shadow-md">
             Get Lifetime Pass
           </button>
         </div>
@@ -214,9 +220,9 @@
       </div>
       <div class="space-y-1 text-center sm:text-left">
         <h4 data-i18n="dual_title" class="font-extrabold text-slate-900 text-sm">Managing multiple parallel project compilations?</h4>
-        <p data-i18n-html="dual_desc" class="text-xs text-slate-600">Get the <strong>PMS Lifetime Dual-Project Pass</strong> for <strong>$999.00</strong> (one-time payment) with simultaneous dual-portfolio synthesis.</p>
+        <p id="desc-dual" data-i18n-html="dual_desc" class="text-xs text-slate-600">Get the <strong>PMS Lifetime Dual-Project Pass</strong> for <strong>$999.00</strong> (one-time payment) with simultaneous dual-portfolio synthesis.</p>
       </div>
-      <button id="btn-cta-dual" data-i18n="dual_btn" onclick="event.stopPropagation(); focusPricingCard('card-dual', false); openPaddleCheckout('pri_01m62yz6gy95weaxyefzy8kqhc')" class="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs whitespace-nowrap shadow-xs transition">
+      <button id="btn-cta-dual" data-i18n="dual_btn" onclick="event.stopPropagation(); focusPricingCard('card-dual', false); openPaddleCheckout(priceIds.dual)" class="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs whitespace-nowrap shadow-xs transition">
         Get Dual-Project Pass ($999)
       </button>
     </div>
@@ -274,11 +280,20 @@
         quarterly: "pri_01m62zhc74dr729rm8zsdzj0s3",
         yearly: "pri_01m62ysx796zem27xb4j6aczm2"
       },
+      lifetime: "pri_01m62yxa4ymwd403hmzstq3a38",
+      dual: "pri_01m62yz6gy95weaxyefzy8kqhc",
       firm: {
         monthly: "pri_01m62z19y7adz1a0gypkp4bbry",
         quarterly: "pri_01m62zqagzd4ae1qsfa4njb409",
         yearly: "pri_01m62z28ynj7f783t4jq0w77yt"
       }
+    };
+
+    const priceAmounts = {
+      pro: { monthly: 79, quarterly: 199, yearly: 690 },
+      lifetime: 699,
+      dual: 999,
+      firm: { monthly: 499, quarterly: 1390, yearly: 4990 }
     };
 
     let currentCycle = "quarterly";
@@ -414,13 +429,13 @@
       ) {
         return "card-firm";
       }
-      if (pId === "pri_01m62yz6gy95weaxyefzy8kqhc" || tier === "lifetime_dual" || tier === "dual") {
+      if (pId === priceIds.dual || pId === "pri_01m62yz6gy95weaxyefzy8kqhc" || tier === "lifetime_dual" || tier === "dual") {
         return "card-dual";
       }
       if (tier === "enterprise" || tier === "firm_midsized") {
         return "card-enterprise";
       }
-      if (pId === "pri_01m62yxa4ymwd403hmzstq3a38" || tier === "lifetime" || tier === "single") {
+      if (pId === priceIds.lifetime || pId === "pri_01m62yxa4ymwd403hmzstq3a38" || tier === "lifetime" || tier === "single") {
         return "card-lifetime";
       }
       return null;
@@ -433,6 +448,25 @@
         return cycle === 'monthly' ? '/month' : cycle === 'yearly' ? '/year' : '/quarter';
       }
       return cycle === 'monthly' ? dict.card1_period_mo : cycle === 'yearly' ? dict.card1_period_yr : dict.card1_period_qu;
+    }
+
+    function formatUsd(val) {
+      return "$" + (Number(val) || 0).toLocaleString("en-US");
+    }
+
+    function renderBuyoutPrices() {
+      const lifeEl = document.getElementById("price-lifetime");
+      if (lifeEl) {
+        lifeEl.innerText = formatUsd(priceAmounts.lifetime);
+      }
+      const dualDescEl = document.getElementById("desc-dual");
+      if (dualDescEl && dualDescEl.innerHTML) {
+        dualDescEl.innerHTML = dualDescEl.innerHTML.replace(/\$\d[\d,]*(?:\.\d{2})?/g, formatUsd(priceAmounts.dual));
+      }
+      const dualBtnEl = document.getElementById("btn-cta-dual");
+      if (dualBtnEl && dualBtnEl.innerText) {
+        dualBtnEl.innerText = dualBtnEl.innerText.replace(/\$\d[\d,]*/g, formatUsd(priceAmounts.dual));
+      }
     }
 
     function switchCycle(cycle) {
@@ -451,29 +485,100 @@
 
       if (cycle === "monthly") {
         btnM.className = activeClass;
-        document.getElementById("price-pro").innerText = "$79";
+        document.getElementById("price-pro").innerText = formatUsd(priceAmounts.pro.monthly);
         document.getElementById("period-pro").innerText = suffix;
-        document.getElementById("price-firm").innerText = "$499";
+        document.getElementById("price-firm").innerText = formatUsd(priceAmounts.firm.monthly);
         document.getElementById("period-firm").innerText = suffix;
         currentProPriceId = priceIds.pro.monthly;
         currentFirmPriceId = priceIds.firm.monthly;
       } else if (cycle === "quarterly") {
         btnQ.className = activeClass;
-        document.getElementById("price-pro").innerText = "$199";
+        document.getElementById("price-pro").innerText = formatUsd(priceAmounts.pro.quarterly);
         document.getElementById("period-pro").innerText = suffix;
-        document.getElementById("price-firm").innerText = "$1,390";
+        document.getElementById("price-firm").innerText = formatUsd(priceAmounts.firm.quarterly);
         document.getElementById("period-firm").innerText = suffix;
         currentProPriceId = priceIds.pro.quarterly;
         currentFirmPriceId = priceIds.firm.quarterly;
       } else if (cycle === "yearly") {
         btnY.className = activeClass;
-        document.getElementById("price-pro").innerText = "$690";
+        document.getElementById("price-pro").innerText = formatUsd(priceAmounts.pro.yearly);
         document.getElementById("period-pro").innerText = suffix;
-        document.getElementById("price-firm").innerText = "$4,990";
+        document.getElementById("price-firm").innerText = formatUsd(priceAmounts.firm.yearly);
         document.getElementById("period-firm").innerText = suffix;
         currentProPriceId = priceIds.pro.yearly;
         currentFirmPriceId = priceIds.firm.yearly;
       }
+      renderBuyoutPrices();
+    }
+
+    // Track 1: Zero-latency URL Snapshot Price Sync (?pms_prices=79_199_690_699_999_499_1390_4990)
+    // Pure numeric URL parameters from the extension — zero backend credential exposure
+    function applyUrlPriceSnapshot() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const snap = (params.get("pms_prices") || "").trim();
+        if (!snap) return;
+        const parts = snap.split("_").map(function(n) { return parseInt(n, 10); });
+        if (parts.length >= 8 && parts.every(function(n) { return !isNaN(n) && n > 0; })) {
+          priceAmounts.pro.monthly = parts[0];
+          priceAmounts.pro.quarterly = parts[1];
+          priceAmounts.pro.yearly = parts[2];
+          priceAmounts.lifetime = parts[3];
+          priceAmounts.dual = parts[4];
+          priceAmounts.firm.monthly = parts[5];
+          priceAmounts.firm.quarterly = parts[6];
+          priceAmounts.firm.yearly = parts[7];
+          switchCycle(currentCycle);
+        }
+      } catch (_) {}
+    }
+
+    // Track 2: Official Paddle.PricePreview() Live Catalog Sync (100% via Paddle public client token)
+    function syncLivePricingFromPaddlePreview() {
+      if (typeof window.Paddle === "undefined" || typeof window.Paddle.PricePreview !== "function") {
+        return;
+      }
+      try {
+        const ctx = getUrlCheckoutContext();
+        const previewParams = {
+          items: [
+            { priceId: priceIds.pro.monthly, quantity: 1 },
+            { priceId: priceIds.pro.quarterly, quantity: 1 },
+            { priceId: priceIds.pro.yearly, quantity: 1 },
+            { priceId: priceIds.lifetime, quantity: 1 },
+            { priceId: priceIds.dual, quantity: 1 },
+            { priceId: priceIds.firm.monthly, quantity: 1 },
+            { priceId: priceIds.firm.quarterly, quantity: 1 },
+            { priceId: priceIds.firm.yearly, quantity: 1 }
+          ]
+        };
+        if (ctx.discountCode) {
+          previewParams.discountCode = ctx.discountCode;
+        }
+        window.Paddle.PricePreview(previewParams)
+          .then(function(res) {
+            const lineItems = res && res.data && res.data.details && res.data.details.lineItems;
+            if (!Array.isArray(lineItems)) return;
+            lineItems.forEach(function(item) {
+              const pid = item && item.price && item.price.id;
+              const rawTotal = item && item.totals && (item.totals.total || item.totals.subtotal);
+              if (!pid || !rawTotal) return;
+              const usdVal = Math.round(parseFloat(rawTotal) / 100);
+              if (!usdVal || usdVal <= 0) return;
+
+              if (pid === priceIds.pro.monthly) priceAmounts.pro.monthly = usdVal;
+              else if (pid === priceIds.pro.quarterly) priceAmounts.pro.quarterly = usdVal;
+              else if (pid === priceIds.pro.yearly) priceAmounts.pro.yearly = usdVal;
+              else if (pid === priceIds.lifetime) priceAmounts.lifetime = usdVal;
+              else if (pid === priceIds.dual) priceAmounts.dual = usdVal;
+              else if (pid === priceIds.firm.monthly) priceAmounts.firm.monthly = usdVal;
+              else if (pid === priceIds.firm.quarterly) priceAmounts.firm.quarterly = usdVal;
+              else if (pid === priceIds.firm.yearly) priceAmounts.firm.yearly = usdVal;
+            });
+            switchCycle(currentCycle);
+          })
+          .catch(function() {});
+      } catch (_) {}
     }
 
     // Intercept setLang to refresh period suffix & selected badge
@@ -486,18 +591,66 @@
       switchCycle(currentCycle);
     };
 
-    // Initialize Paddle.js v2 SDK (Production Live Environment)
-    try {
-      Paddle.Environment.set("production");
-      Paddle.Initialize({
-        token: "live_9b85863a29b9a994359f3ce7d36",
-        eventCallback: function(data) {
-          console.log("[Paddle Event]", data);
+    // Initialize Paddle.js v2 SDK (Production Live Environment) with Dual-Track Resilient Loader
+    let isPaddleInitialized = false;
+
+    function initPaddleSdk() {
+      if (isPaddleInitialized) return true;
+      if (typeof window.Paddle === "undefined") return false;
+      try {
+        window.Paddle.Environment.set("production");
+        window.Paddle.Initialize({
+          token: "live_9b85863a29b9a994359f3ce7d36",
+          eventCallback: function(data) {
+            console.log("[Paddle Event]", data);
+          }
+        });
+        isPaddleInitialized = true;
+        console.log("[Paddle] Initialized successfully with live token.");
+        return true;
+      } catch (e) {
+        console.error("[Paddle] Initialization error:", e);
+        return false;
+      }
+    }
+
+    initPaddleSdk();
+
+    function ensurePaddleReady(onReady) {
+      if (initPaddleSdk()) {
+        onReady();
+        return;
+      }
+      const fallbackUrls = [
+        "paddle-v2.js",
+        "https://cdn.paddle.com/paddle/v2/paddle.js"
+      ];
+      let idx = 0;
+      function tryNext() {
+        if (initPaddleSdk()) {
+          onReady();
+          return;
         }
-      });
-      console.log("[Paddle] Initialized successfully with live token.");
-    } catch (e) {
-      console.error("[Paddle] Initialization error:", e);
+        if (idx >= fallbackUrls.length) {
+          console.error("[Paddle] All SDK script sources failed to load.");
+          return;
+        }
+        const s = document.createElement("script");
+        s.src = fallbackUrls[idx++];
+        s.async = true;
+        s.onload = function() {
+          if (initPaddleSdk()) {
+            onReady();
+          } else {
+            tryNext();
+          }
+        };
+        s.onerror = function() {
+          tryNext();
+        };
+        document.head.appendChild(s);
+      }
+      tryNext();
     }
 
     function resolvePaddleLocale(siteLang) {
@@ -539,33 +692,40 @@
         alert("Please select a valid pricing tier.");
         return;
       }
-      try {
-        const ctx = getUrlCheckoutContext();
-        const checkoutPayload = {
-          items: [{ priceId: priceId, quantity: 1 }],
-          settings: {
-            displayMode: "overlay",
-            theme: "light",
-            locale: resolvePaddleLocale(ctx.lang)
+      ensurePaddleReady(function() {
+        try {
+          const ctx = getUrlCheckoutContext();
+          const checkoutPayload = {
+            items: [{ priceId: priceId, quantity: 1 }],
+            settings: {
+              displayMode: "overlay",
+              theme: "light",
+              locale: resolvePaddleLocale(ctx.lang)
+            }
+          };
+          if (ctx.email && ctx.email.includes("@")) {
+            checkoutPayload.customer = { email: ctx.email };
           }
-        };
-        if (ctx.email && ctx.email.includes("@")) {
-          checkoutPayload.customer = { email: ctx.email };
+          if (ctx.discountCode) {
+            checkoutPayload.discountCode = ctx.discountCode;
+          }
+          if (Object.keys(ctx.customData).length > 0) {
+            checkoutPayload.customData = ctx.customData;
+          }
+          window.Paddle.Checkout.open(checkoutPayload);
+        } catch (err) {
+          console.error("Failed to open Paddle Checkout:", err);
         }
-        if (ctx.discountCode) {
-          checkoutPayload.discountCode = ctx.discountCode;
-        }
-        if (Object.keys(ctx.customData).length > 0) {
-          checkoutPayload.customData = ctx.customData;
-        }
-        Paddle.Checkout.open(checkoutPayload);
-      } catch (err) {
-        console.error("Failed to open Paddle Checkout:", err);
-      }
+      });
     }
 
-    // Auto-sync language, cycle tab, target card focus, and trigger Paddle Overlay Checkout when redirected from PMS Chrome Extension
+    // Auto-sync language, live prices (URL snapshot + Paddle.PricePreview), cycle tab, target card focus, and trigger Paddle Overlay Checkout
     window.addEventListener("DOMContentLoaded", function() {
+      applyUrlPriceSnapshot();
+      ensurePaddleReady(function() {
+        syncLivePricingFromPaddlePreview();
+      });
+
       const ctx = getUrlCheckoutContext();
       if (ctx.lang && typeof window.setLang === "function") {
         window.setLang(ctx.lang);
