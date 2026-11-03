@@ -711,6 +711,33 @@
       const lang = (params.get("lang") || localStorage.getItem("pms_site_lang") || "en").trim();
       const tier = (params.get("tier") || "").trim();
       const cycle = (params.get("cycle") || "").trim();
+
+      // Resolve Country Code:
+      // Priority 1: URL parameter (?country=CN or ?country_code=CN or ?checkout[country]=CN)
+      // Priority 2: Stored country in localStorage ("pms_checkout_country")
+      // Priority 3: Derived from active language (zh/zh-CN -> CN for instant WeChat/Alipay routing; zh-TW -> TW; zh-HK -> HK; ja -> JP; ko -> KR)
+      const urlCountry = (params.get("country") || params.get("country_code") || params.get("checkout[country]") || "").trim();
+      let countryCode = "";
+      if (urlCountry) {
+        countryCode = urlCountry.toUpperCase();
+        try { localStorage.setItem("pms_checkout_country", countryCode); } catch (_) {}
+      } else {
+        const storedCountry = (localStorage.getItem("pms_checkout_country") || "").trim().toUpperCase();
+        if (storedCountry && storedCountry.length === 2) {
+          countryCode = storedCountry;
+        } else if (lang === "zh" || lang === "zh-CN" || lang === "zh-Hans") {
+          countryCode = "CN";
+        } else if (lang === "zh-TW" || lang === "zh-Hant") {
+          countryCode = "TW";
+        } else if (lang === "zh-HK") {
+          countryCode = "HK";
+        } else if (lang === "ja") {
+          countryCode = "JP";
+        } else if (lang === "ko") {
+          countryCode = "KR";
+        }
+      }
+
       const urlEmail = (params.get("prefilled_email") || params.get("checkout[email]") || params.get("email") || "").trim();
       if (urlEmail && urlEmail.includes("@")) {
         try {
@@ -748,12 +775,14 @@
       const campaignName = params.get("checkout[custom][campaign_name]");
       if (uid) customData.uid = uid;
       if (email && email.includes("@")) customData.subscriber_email = email;
+      if (countryCode) customData.country_code = countryCode;
       if (proCredit) customData.pro_credit_usd = proCredit;
       if (upgradeKey) customData.upgrade_from_key = upgradeKey;
       if (pricingVer) customData.pricing_version = pricingVer;
       if (campaignName) customData.campaign_name = campaignName;
+      if (lang) customData.lang = lang;
       const priceId = (params.get("price_id") || params.get("priceId") || "").trim();
-      return { priceId, tier, cycle, lang, email, discountCode, customData };
+      return { priceId, tier, cycle, lang, countryCode, email, discountCode, customData };
     }
 
     window.syncPmsUserEmailBanner = function(forceEmail, forceUid) {
@@ -812,8 +841,27 @@
               locale: resolvePaddleLocale(ctx.lang)
             }
           };
-          if (ctx.email && ctx.email.includes("@")) {
-            checkoutPayload.customer = { email: ctx.email };
+          // Resolve user email across URL params, uncommitted inline input, and localStorage
+          let userEmail = ctx.email;
+          if (!userEmail || !userEmail.includes("@")) {
+            const inputEl = document.getElementById("pms-inline-email-input");
+            if (inputEl && inputEl.value && inputEl.value.includes("@")) {
+              userEmail = inputEl.value.trim();
+              window.PMS_ACTIVE_USER_EMAIL = userEmail;
+              try { localStorage.setItem("pms_checkout_email", userEmail); } catch (_) {}
+              if (typeof window.syncPmsUserEmailBanner === "function") {
+                window.syncPmsUserEmailBanner(userEmail);
+              }
+            }
+          }
+
+          // Paddle Billing Customer & Address Prefill:
+          // To prefill countryCode/address without validation errors, Paddle requires customer.email or customer.id.
+          if (userEmail && userEmail.includes("@")) {
+            checkoutPayload.customer = { email: userEmail };
+            if (ctx.countryCode) {
+              checkoutPayload.customer.address = { countryCode: ctx.countryCode };
+            }
           }
           if (ctx.discountCode) {
             checkoutPayload.discountCode = ctx.discountCode;
