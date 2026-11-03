@@ -67,6 +67,9 @@
         Designed for researchers, scholars, and technical authors. All Pro subscriptions feature 100% credit deduction towards lifetime passes.
       </p>
 
+      <!-- Auto-Synced Account Email Pill -->
+      <div id="pms-user-email-bar" class="pt-2 flex justify-center"></div>
+
       <!-- Cycle Switcher -->
       <div class="pt-6 flex justify-center">
         <div class="inline-flex p-1 bg-slate-200/80 rounded-xl border border-slate-300 text-xs font-bold shadow-inner">
@@ -574,6 +577,9 @@
       }
       updateSelectedBadgeTranslations(lang);
       switchCycle(currentCycle);
+      if (typeof window.syncPmsUserEmailBanner === "function") {
+        window.syncPmsUserEmailBanner();
+      }
     };
 
     // Initialize Paddle.js v2 SDK (Production Live Environment) with Dual-Track Resilient Loader
@@ -705,15 +711,43 @@
       const lang = (params.get("lang") || localStorage.getItem("pms_site_lang") || "en").trim();
       const tier = (params.get("tier") || "").trim();
       const cycle = (params.get("cycle") || "").trim();
-      const email = (params.get("prefilled_email") || params.get("checkout[email]") || params.get("email") || "").trim();
+      const urlEmail = (params.get("prefilled_email") || params.get("checkout[email]") || params.get("email") || "").trim();
+      if (urlEmail && urlEmail.includes("@")) {
+        try {
+          localStorage.setItem("pms_checkout_email", urlEmail);
+          window.PMS_ACTIVE_USER_EMAIL = urlEmail;
+        } catch (_) {}
+      }
+      const inputEl = document.getElementById("pms-inline-email-input");
+      const inputEmail = inputEl && inputEl.value ? String(inputEl.value).trim() : "";
+      if (inputEmail && inputEmail.includes("@")) {
+        try {
+          localStorage.setItem("pms_checkout_email", inputEmail);
+        } catch (_) {}
+      }
+      const storedEmail = (window.PMS_ACTIVE_USER_EMAIL || localStorage.getItem("pms_checkout_email") || "").trim();
+      const email = (urlEmail && urlEmail.includes("@"))
+        ? urlEmail
+        : (inputEmail && inputEmail.includes("@"))
+          ? inputEmail
+          : storedEmail;
+
       const discountCode = (params.get("checkout[discount_code]") || params.get("discount_code") || "").trim();
       const customData = {};
-      const uid = params.get("checkout[custom][uid]") || params.get("uid");
+      const urlUid = (params.get("checkout[custom][uid]") || params.get("uid") || "").trim();
+      if (urlUid) {
+        try {
+          localStorage.setItem("pms_checkout_uid", urlUid);
+          window.PMS_ACTIVE_USER_UID = urlUid;
+        } catch (_) {}
+      }
+      const uid = urlUid || (window.PMS_ACTIVE_USER_UID || localStorage.getItem("pms_checkout_uid") || "").trim();
       const proCredit = params.get("checkout[custom][pro_credit_usd]");
       const upgradeKey = params.get("checkout[custom][upgrade_from_key]");
       const pricingVer = params.get("checkout[custom][pricing_version]");
       const campaignName = params.get("checkout[custom][campaign_name]");
       if (uid) customData.uid = uid;
+      if (email && email.includes("@")) customData.subscriber_email = email;
       if (proCredit) customData.pro_credit_usd = proCredit;
       if (upgradeKey) customData.upgrade_from_key = upgradeKey;
       if (pricingVer) customData.pricing_version = pricingVer;
@@ -721,6 +755,46 @@
       const priceId = (params.get("price_id") || params.get("priceId") || "").trim();
       return { priceId, tier, cycle, lang, email, discountCode, customData };
     }
+
+    window.syncPmsUserEmailBanner = function(forceEmail, forceUid) {
+      try {
+        if (forceEmail && forceEmail.includes("@")) {
+          localStorage.setItem("pms_checkout_email", forceEmail.trim());
+          window.PMS_ACTIVE_USER_EMAIL = forceEmail.trim();
+        }
+        if (forceUid) {
+          localStorage.setItem("pms_checkout_uid", forceUid.trim());
+          window.PMS_ACTIVE_USER_UID = forceUid.trim();
+        }
+        const bar = document.getElementById("pms-user-email-bar");
+        if (!bar) return;
+        const lang = (localStorage.getItem("pms_site_lang") || "zh").trim();
+        const isZh = lang.startsWith("zh");
+        const currentEmail = (window.PMS_ACTIVE_USER_EMAIL || localStorage.getItem("pms_checkout_email") || "").trim();
+
+        if (currentEmail && currentEmail.includes("@") && !window._pmsEditingEmail) {
+          bar.innerHTML =
+            '<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs text-slate-700 shadow-2xs">' +
+              '<span class="w-2 h-2 rounded-full bg-emerald-500"></span>' +
+              '<span>' + (isZh ? '已自动绑定卡密接收与付款邮箱：' : 'Checkout & license email: ') + '<strong class="text-slate-900 font-semibold">' + currentEmail + '</strong></span>' +
+              '<button type="button" onclick="window._pmsEditingEmail=true;window.syncPmsUserEmailBanner();" class="text-emerald-600 hover:text-emerald-700 font-semibold underline ml-1 cursor-pointer">' +
+                (isZh ? '更换' : 'Change') +
+              '</button>' +
+            '</div>';
+        } else {
+          bar.innerHTML =
+            '<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-slate-300 text-xs text-slate-700 shadow-2xs">' +
+              '<span>' + (isZh ? '📩 接收授权卡密邮箱：' : '📩 Account Email:') + '</span>' +
+              '<input id="pms-inline-email-input" type="email" value="' + (currentEmail || '') + '" placeholder="' + (isZh ? '输入邮箱将自动带入收银台...' : 'you@example.com') + '" ' +
+                'class="px-2 py-0.5 border border-slate-200 rounded text-xs text-slate-900 focus:outline-none focus:border-emerald-500 w-52" />' +
+              '<button type="button" onclick="var v=document.getElementById(\'pms-inline-email-input\').value.trim();if(v&&v.includes(\'@\')){window._pmsEditingEmail=false;window.syncPmsUserEmailBanner(v);}" ' +
+                'class="px-2.5 py-0.5 rounded bg-emerald-600 text-white font-semibold hover:bg-emerald-500 cursor-pointer">' +
+                (isZh ? '绑定' : 'Save') +
+              '</button>' +
+            '</div>';
+        }
+      } catch (_) {}
+    };
 
     function openPaddleCheckout(priceId) {
       if (!priceId) {
@@ -774,6 +848,9 @@
       syncLivePricingFromSameOriginJson();
 
       const ctx = getUrlCheckoutContext();
+      if (typeof window.syncPmsUserEmailBanner === "function") {
+        window.syncPmsUserEmailBanner(ctx.email);
+      }
       if (ctx.lang && typeof window.setLang === "function") {
         window.setLang(ctx.lang);
       } else {
