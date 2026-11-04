@@ -774,7 +774,11 @@
       const pricingVer = params.get("checkout[custom][pricing_version]");
       const campaignName = params.get("checkout[custom][campaign_name]");
       if (uid) customData.uid = uid;
-      if (email && email.includes("@")) customData.subscriber_email = email;
+      if (email && email.includes("@")) {
+        customData.subscriber_email = email;
+        customData.customer_email = email;
+        customData.user_email = email;
+      }
       if (countryCode) customData.country_code = countryCode;
       if (proCredit) customData.pro_credit_usd = proCredit;
       if (upgradeKey) customData.upgrade_from_key = upgradeKey;
@@ -934,6 +938,13 @@
       }
 
       if (ctx.priceId && ctx.priceId.startsWith("pri_")) {
+        // 清理地址栏中的一次性自动弹窗参数 price_id，防止用户刷新页面或付款完成后再次重复创建未支付草稿单（触发 Paddle 弃单挽回邮件）
+        try {
+          const cleanUrl = new URL(window.location.href);
+          cleanUrl.searchParams.delete("price_id");
+          cleanUrl.searchParams.delete("priceId");
+          window.history.replaceState({}, document.title, cleanUrl.pathname + (cleanUrl.search || "") + (cleanUrl.hash || ""));
+        } catch (_) {}
         setTimeout(function() {
           openPaddleCheckout(ctx.priceId);
         }, 180);
