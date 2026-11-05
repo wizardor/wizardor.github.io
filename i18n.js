@@ -1216,11 +1216,11 @@ function switchBrowserTab(tabName) {
     const tabPane = document.getElementById('tab-pane-' + t);
     if (tabBtn && tabPane) {
       if (t === tabName) {
-        tabBtn.className = "flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition shadow-xs flex items-center justify-center gap-2 " + 
+        tabBtn.className = "flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition shadow-xs flex items-center justify-center gap-2 cursor-pointer outline-none " + 
           (t === 'chrome' ? "bg-emerald-600 text-white" : t === 'edge' ? "bg-blue-600 text-white" : "bg-amber-600 text-white");
         tabPane.style.display = 'block';
       } else {
-        tabBtn.className = "flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition flex items-center justify-center gap-2";
+        tabBtn.className = "flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition flex items-center justify-center gap-2 cursor-pointer outline-none";
         tabPane.style.display = 'none';
       }
     }

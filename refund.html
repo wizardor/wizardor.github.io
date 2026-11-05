@@ -120,13 +120,13 @@
     </div>
   </footer>
 
-    <!-- Three-Track Download Modal -->
+      <!-- Three-Track Download Modal -->
   <div id="download-modal" class="fixed inset-0 z-[9999] hidden items-center justify-center p-4 bg-slate-900/65 backdrop-blur-xs transition-opacity" style="display: none; position: fixed; inset: 0; z-index: 9999; align-items: center; justify-content: center; background-color: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px); padding: 1rem;">
     <div class="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 sm:p-8 space-y-6 max-h-[92vh] overflow-y-auto text-left" style="background-color: #ffffff; color: #1e293b;">
       
       <!-- Close button -->
       <button type="button" onclick="closeDownloadModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100 transition cursor-pointer" aria-label="Close">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        <svg class="w-5 h-5 shrink-0" width="20" height="20" style="width: 1.25rem; height: 1.25rem; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
 
       <!-- Modal Title -->
@@ -135,45 +135,43 @@
           Install PMS Browser Extension
         </h3>
         <p class="text-xs text-slate-500">
-          Official Standalone Offline Packages (v1.3.288) · Enterprise Grade AST Security
+          Official Standalone Offline Packages (v1.3.288) • Enterprise Grade AST Security
         </p>
       </div>
 
       <!-- Three-Track Tabs Switcher -->
       <div class="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-100 border border-slate-200">
         <!-- Chrome Tab -->
-        <button type="button" id="tab-btn-chrome" onclick="switchBrowserTab('chrome')" class="flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition shadow-xs flex items-center justify-center gap-2 bg-emerald-600 text-white cursor-pointer">
+        <button type="button" id="tab-btn-chrome" onclick="switchBrowserTab('chrome')" class="flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition shadow-xs flex items-center justify-center gap-2 bg-emerald-600 text-white cursor-pointer outline-none">
           <span>🌐</span>
           <span data-i18n="tab_chrome">Google Chrome</span>
         </button>
         <!-- Edge Tab -->
-        <button type="button" id="tab-btn-edge" onclick="switchBrowserTab('edge')" class="flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition flex items-center justify-center gap-2 cursor-pointer">
-          <span>🌊</span>
+        <button type="button" id="tab-btn-edge" onclick="switchBrowserTab('edge')" class="flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition flex items-center justify-center gap-2 cursor-pointer outline-none">
+          <span>🌐</span>
           <span data-i18n="tab_edge">Microsoft Edge</span>
         </button>
         <!-- Firefox Tab -->
-        <button type="button" id="tab-btn-firefox" onclick="switchBrowserTab('firefox')" class="flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition flex items-center justify-center gap-2 cursor-pointer">
+        <button type="button" id="tab-btn-firefox" onclick="switchBrowserTab('firefox')" class="flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition flex items-center justify-center gap-2 cursor-pointer outline-none">
           <span>🦊</span>
           <span data-i18n="tab_firefox">Mozilla Firefox</span>
         </button>
       </div>
 
-      <!-- ═════════════════════════════════════════════════════════════════════ -->
       <!-- PANE 1: Google Chrome -->
-      <!-- ═════════════════════════════════════════════════════════════════════ -->
       <div id="tab-pane-chrome" class="space-y-5" style="display: block;">
         <!-- Header & Download CTA -->
         <div class="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div class="space-y-1 text-center sm:text-left">
             <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              <span data-i18n="chrome_badge">Official Direct Release · v1.3.288</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500" style="width: 6px; height: 6px; border-radius: 9999px; background-color: #10b981; display: inline-block;"></span>
+              <span data-i18n="chrome_badge">Official Direct Release • v1.3.288</span>
             </div>
             <div class="font-bold text-slate-900 text-sm" data-i18n="chrome_title">Google Chrome Standalone Package</div>
             <div class="text-xs text-slate-500">pms-extension-chrome-latest.zip (7.93 MB)</div>
           </div>
-          <a href="pms-extension-chrome-latest.zip" download="pms-extension-chrome-latest.zip" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 shrink-0 cursor-pointer">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <a href="pms-extension-chrome-latest.zip" download="pms-extension-chrome-latest.zip" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 shrink-0 cursor-pointer" style="text-decoration: none;">
+            <svg class="w-4 h-4 shrink-0" width="16" height="16" style="width: 1rem; height: 1rem; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             <span data-i18n="chrome_btn">Download for Chrome (7.93 MB)</span>
           </a>
         </div>
@@ -181,53 +179,51 @@
         <!-- 3 Steps Visual Guide -->
         <div class="space-y-3">
           <div class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80">
-            <div class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">1</div>
+            <div class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5" style="width: 1.5rem; height: 1.5rem; border-radius: 9999px; flex-shrink: 0;">1</div>
             <div class="space-y-0.5">
               <h4 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="chrome_step1_title">Step 1: Download & Extract</h4>
-              <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="chrome_step1_desc">Click above to download <code>pms-extension-chrome-latest.zip</code> and extract it to a folder (e.g. <code>D:\PMS-Extension</code>).</p>
+              <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="chrome_step1_desc">Click above to download <code>pms-extension-chrome-latest.zip</code> and extract it to a local folder (e.g. <code>D:\PMS-Extension</code>).</p>
             </div>
           </div>
 
           <div class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80">
-            <div class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">2</div>
+            <div class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5" style="width: 1.5rem; height: 1.5rem; border-radius: 9999px; flex-shrink: 0;">2</div>
             <div class="space-y-0.5">
-              <h4 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="chrome_step2_title">Step 2: Enable Developer Mode</h4>
-              <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="chrome_step2_desc">Navigate to <code>chrome://extensions/</code> in your address bar, then turn on <strong>Developer mode</strong> in the top-right.</p>
+              <h4 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="chrome_step2_title">Step 2: Open Extensions & Enable Developer Mode</h4>
+              <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="chrome_step2_desc">In Chrome address bar, enter <code>chrome://extensions/</code> and toggle on <strong>Developer mode</strong> in the top right.</p>
             </div>
           </div>
 
           <div class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80">
-            <div class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">3</div>
+            <div class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5" style="width: 1.5rem; height: 1.5rem; border-radius: 9999px; flex-shrink: 0;">3</div>
             <div class="space-y-0.5">
               <h4 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="chrome_step3_title">Step 3: Load Unpacked Extension</h4>
-              <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="chrome_step3_desc">Click <strong>Load unpacked</strong> on the top-left, select your extracted folder, and the PMS workbench is ready!</p>
+              <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="chrome_step3_desc">Click <strong>Load unpacked</strong> on top left, select the extracted folder, and PMS icon appears on your browser toolbar!</p>
             </div>
           </div>
         </div>
 
         <!-- Note -->
         <div class="p-3 bg-emerald-50/50 border border-emerald-100 rounded-xl text-slate-600 text-[11px] leading-relaxed flex items-center gap-2">
-          <span class="text-base shrink-0">ℹ️</span>
-          <span data-i18n="chrome_note">Chrome Web Store official review is in progress. This standalone package gives you 100% full functionality immediately.</span>
+          <span class="text-base shrink-0">💡</span>
+          <span data-i18n="chrome_note">Chrome Web Store listing is pending formal audit review. Direct standalone package offers 100% complete features and instantaneous availability.</span>
         </div>
       </div>
 
-      <!-- ═════════════════════════════════════════════════════════════════════ -->
       <!-- PANE 2: Microsoft Edge -->
-      <!-- ═════════════════════════════════════════════════════════════════════ -->
       <div id="tab-pane-edge" class="space-y-5" style="display: none;">
         <!-- Header & Download CTA -->
         <div class="bg-blue-50/60 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div class="space-y-1 text-center sm:text-left">
             <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-              <span data-i18n="edge_badge">Chromium Optimized · v1.3.288</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-500" style="width: 6px; height: 6px; border-radius: 9999px; background-color: #3b82f6; display: inline-block;"></span>
+              <span data-i18n="edge_badge">Chromium Native • v1.3.288</span>
             </div>
-            <div class="font-bold text-slate-900 text-sm" data-i18n="edge_title">Microsoft Edge Standalone Package</div>
+            <div class="font-bold text-slate-900 text-sm" data-i18n="edge_title">Microsoft Edge Chromium Package</div>
             <div class="text-xs text-slate-500">pms-extension-edge-latest.zip (7.93 MB)</div>
           </div>
-          <a href="pms-extension-edge-latest.zip" download="pms-extension-edge-latest.zip" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 shrink-0 cursor-pointer">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <a href="pms-extension-edge-latest.zip" download="pms-extension-edge-latest.zip" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 shrink-0 cursor-pointer" style="text-decoration: none;">
+            <svg class="w-4 h-4 shrink-0" width="16" height="16" style="width: 1rem; height: 1rem; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             <span data-i18n="edge_btn">Download for Edge (7.93 MB)</span>
           </a>
         </div>
@@ -235,53 +231,51 @@
         <!-- 3 Steps Visual Guide -->
         <div class="space-y-3">
           <div class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80">
-            <div class="w-6 h-6 rounded-full bg-blue-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">1</div>
+            <div class="w-6 h-6 rounded-full bg-blue-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5" style="width: 1.5rem; height: 1.5rem; border-radius: 9999px; flex-shrink: 0;">1</div>
             <div class="space-y-0.5">
               <h4 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="edge_step1_title">Step 1: Download & Extract</h4>
-              <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="edge_step1_desc">Click above to download <code>pms-extension-edge-latest.zip</code> and extract it to a folder on your computer.</p>
+              <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="edge_step1_desc">Click above to download <code>pms-extension-edge-latest.zip</code> and extract it to a local folder.</p>
             </div>
           </div>
 
           <div class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80">
-            <div class="w-6 h-6 rounded-full bg-blue-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">2</div>
+            <div class="w-6 h-6 rounded-full bg-blue-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5" style="width: 1.5rem; height: 1.5rem; border-radius: 9999px; flex-shrink: 0;">2</div>
             <div class="space-y-0.5">
-              <h4 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="edge_step2_title">Step 2: Enable Developer Mode</h4>
-              <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="edge_step2_desc">Open Edge, enter <code>edge://extensions/</code>, and toggle on <strong>Developer mode</strong> in the left sidebar.</p>
+              <h4 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="edge_step2_title">Step 2: Open Extensions & Enable Developer Mode</h4>
+              <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="edge_step2_desc">In Edge address bar, enter <code>edge://extensions/</code> and toggle on <strong>Developer mode</strong> in the left sidebar.</p>
             </div>
           </div>
 
           <div class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80">
-            <div class="w-6 h-6 rounded-full bg-blue-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">3</div>
+            <div class="w-6 h-6 rounded-full bg-blue-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5" style="width: 1.5rem; height: 1.5rem; border-radius: 9999px; flex-shrink: 0;">3</div>
             <div class="space-y-0.5">
               <h4 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="edge_step3_title">Step 3: Load Unpacked Extension</h4>
-              <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="edge_step3_desc">Click <strong>Load unpacked</strong> at the top, choose your extracted folder, and PMS is instantly activated on Edge!</p>
+              <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="edge_step3_desc">Click <strong>Load unpacked</strong>, select your extracted folder, and PMS is ready for Edge!</p>
             </div>
           </div>
         </div>
 
         <!-- Note -->
         <div class="p-3 bg-blue-50/50 border border-blue-100 rounded-xl text-slate-600 text-[11px] leading-relaxed flex items-center gap-2">
-          <span class="text-base shrink-0">ℹ️</span>
-          <span data-i18n="edge_note">Microsoft Edge natively runs Chromium extensions. When Chrome Store review completes, Edge users can also install in 1 click.</span>
+          <span class="text-base shrink-0">💡</span>
+          <span data-i18n="edge_note">100% compatible with Edge Chromium core. Supports Edge side panel and split screen workflows.</span>
         </div>
       </div>
 
-      <!-- ═════════════════════════════════════════════════════════════════════ -->
       <!-- PANE 3: Mozilla Firefox -->
-      <!-- ═════════════════════════════════════════════════════════════════════ -->
       <div id="tab-pane-firefox" class="space-y-5" style="display: none;">
         <!-- Header & Download CTA -->
         <div class="bg-amber-50/60 border border-amber-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div class="space-y-1 text-center sm:text-left">
             <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-bold">
-              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-              <span data-i18n="firefox_badge">Native Gecko MV3 · v1.3.288</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500" style="width: 6px; height: 6px; border-radius: 9999px; background-color: #f59e0b; display: inline-block;"></span>
+              <span data-i18n="firefox_badge">Native Gecko MV3 • v1.3.288</span>
             </div>
             <div class="font-bold text-slate-900 text-sm" data-i18n="firefox_title">Mozilla Firefox Gecko MV3 Package</div>
             <div class="text-xs text-slate-500">pms-extension-firefox-latest.zip (7.93 MB)</div>
           </div>
-          <a href="pms-extension-firefox-latest.zip" download="pms-extension-firefox-latest.zip" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 shrink-0 cursor-pointer">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <a href="pms-extension-firefox-latest.zip" download="pms-extension-firefox-latest.zip" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 shrink-0 cursor-pointer" style="text-decoration: none;">
+            <svg class="w-4 h-4 shrink-0" width="16" height="16" style="width: 1rem; height: 1rem; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             <span data-i18n="firefox_btn">Download for Firefox (7.93 MB)</span>
           </a>
         </div>
@@ -289,7 +283,7 @@
         <!-- 3 Steps Visual Guide -->
         <div class="space-y-3">
           <div class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80">
-            <div class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">1</div>
+            <div class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5" style="width: 1.5rem; height: 1.5rem; border-radius: 9999px; flex-shrink: 0;">1</div>
             <div class="space-y-0.5">
               <h4 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="firefox_step1_title">Step 1: Download & Extract</h4>
               <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="firefox_step1_desc">Click above to download <code>pms-extension-firefox-latest.zip</code> and extract it to a local folder.</p>
@@ -297,7 +291,7 @@
           </div>
 
           <div class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80">
-            <div class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">2</div>
+            <div class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5" style="width: 1.5rem; height: 1.5rem; border-radius: 9999px; flex-shrink: 0;">2</div>
             <div class="space-y-0.5">
               <h4 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="firefox_step2_title">Step 2: Open Add-on Debugging</h4>
               <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="firefox_step2_desc">In Firefox address bar, enter <code>about:debugging#/runtime/this-firefox</code> and press Enter.</p>
@@ -305,7 +299,7 @@
           </div>
 
           <div class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80">
-            <div class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">3</div>
+            <div class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5" style="width: 1.5rem; height: 1.5rem; border-radius: 9999px; flex-shrink: 0;">3</div>
             <div class="space-y-0.5">
               <h4 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="firefox_step3_title">Step 3: Load Temporary Add-on</h4>
               <p class="text-xs text-slate-600 leading-relaxed" data-i18n-html="firefox_step3_desc">Click <strong>Load Temporary Add-on...</strong>, select <code>manifest.json</code> in your extracted folder, and PMS launches in your sidebar!</p>
@@ -315,7 +309,7 @@
 
         <!-- Note -->
         <div class="p-3 bg-amber-50/50 border border-amber-100 rounded-xl text-slate-600 text-[11px] leading-relaxed flex items-center gap-2">
-          <span class="text-base shrink-0">ℹ️</span>
+          <span class="text-base shrink-0">💡</span>
           <span data-i18n="firefox_note">Gecko MV3 sidebar integration supported. Direct offline installation with full privacy isolation.</span>
         </div>
       </div>
