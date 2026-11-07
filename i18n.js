@@ -20,7 +20,7 @@ const PMS_TRANSLATIONS = {
     "chrome_badge": "Official Direct Release · v1.3.288",
     "chrome_btn": "Download Offline ZIP (7.93 MB)",
     "chrome_step1_title": "Step 1: Download & Extract",
-    "chrome_step1_desc": "Click above to download <code>pms-extension-chrome-latest.zip</code> and extract it to a folder (e.g. <code>D:\PMS-Extension</code>).",
+    "chrome_step1_desc": "Click above to download <code>pms-extension-chrome-latest.zip</code> and extract it to a folder (e.g. <code>D:\\PMS-Extension</code>).",
     "chrome_step2_title": "Step 2: Enable Developer Mode",
     "chrome_step2_desc": "Navigate to <code>chrome://extensions/</code> in your address bar, then turn on <strong>Developer mode</strong> in the top-right.",
     "chrome_step3_title": "Step 3: Load Unpacked Extension",
@@ -52,7 +52,7 @@ const PMS_TRANSLATIONS = {
     "modal_download_badge": "Official Direct Release · v1.3.288",
     "modal_download_btn": "Download Extension ZIP (v1.3.288)",
     "modal_step1_title": "Step 1: Download & Extract",
-    "modal_step1_desc": "Click the button above to download <code>pms-extension-latest.zip</code> and extract it to a local folder (e.g. <code>D:\PMS-Extension</code>).",
+    "modal_step1_desc": "Click the button above to download <code>pms-extension-latest.zip</code> and extract it to a local folder (e.g. <code>D:\\PMS-Extension</code>).",
     "modal_step2_title": "Step 2: Enable Developer Mode",
     "modal_step2_desc": "Open your browser, navigate to <code>chrome://extensions/</code>, and toggle on <strong>Developer mode</strong> in the top-right corner.",
     "modal_step3_title": "Step 3: Load Unpacked Extension",
@@ -205,7 +205,7 @@ const PMS_TRANSLATIONS = {
     "chrome_badge": "官方直发独立版 · v1.3.288",
     "chrome_btn": "下载离线 ZIP 包 (7.93 MB)",
     "chrome_step1_title": "步骤 1：下载并解压",
-    "chrome_step1_desc": "点击上方按钮下载 <code>pms-extension-chrome-latest.zip</code>，解压到本地常用文件夹（如 <code>D:\PMS-Extension</code>）。",
+    "chrome_step1_desc": "点击上方按钮下载 <code>pms-extension-chrome-latest.zip</code>，解压到本地常用文件夹（如 <code>D:\\PMS-Extension</code>）。",
     "chrome_step2_title": "步骤 2：打开扩展管理并开启开发者模式",
     "chrome_step2_desc": "在 Chrome 地址栏输入 <code>chrome://extensions/</code>，开启右上角的 <strong>「开发者模式」</strong> 开关。",
     "chrome_step3_title": "步骤 3：加载已解压的扩展程序",
@@ -237,7 +237,7 @@ const PMS_TRANSLATIONS = {
     "modal_download_badge": "官方直发独立版 · v1.3.288",
     "modal_download_btn": "立即下载扩展包 ZIP (v1.3.288)",
     "modal_step1_title": "步骤 1：下载并解压",
-    "modal_step1_desc": "点击上方按钮下载 <code>pms-extension-latest.zip</code>，并将其解压到本地任意常用文件夹（如 <code>D:\PMS-Extension</code>）。",
+    "modal_step1_desc": "点击上方按钮下载 <code>pms-extension-latest.zip</code>，并将其解压到本地任意常用文件夹（如 <code>D:\\PMS-Extension</code>）。",
     "modal_step2_title": "步骤 2：打开扩展管理并开启开发者模式",
     "modal_step2_desc": "在 Chrome 或 Edge 浏览器地址栏输入 <code>chrome://extensions/</code>，打开右上角的 <strong>「开发者模式」</strong> 开关。",
     "modal_step3_title": "步骤 3：加载已解压的扩展程序",
@@ -395,7 +395,7 @@ const PMS_TRANSLATIONS = {
     "chrome_badge": "官方直發獨立版 · v1.3.288",
     "chrome_btn": "下載離線 ZIP 包 (7.93 MB)",
     "chrome_step1_title": "步驟 1：下載並解壓",
-    "chrome_step1_desc": "點擊上方按鈕下載 <code>pms-extension-chrome-latest.zip</code>，解壓到本地資料夾（如 <code>D:\PMS-Extension</code>）。",
+    "chrome_step1_desc": "點擊上方按鈕下載 <code>pms-extension-chrome-latest.zip</code>，解壓到本地資料夾（如 <code>D:\\PMS-Extension</code>）。",
     "chrome_step2_title": "步驟 2：開啟擴充管理並啟用開發者模式",
     "chrome_step2_desc": "在 Chrome 網址列輸入 <code>chrome://extensions/</code>，開啟右上角的 <strong>「開發者模式」</strong> 開關。",
     "chrome_step3_title": "步驟 3：載入未封裝項目",
@@ -427,7 +427,7 @@ const PMS_TRANSLATIONS = {
     "modal_download_badge": "官方直發獨立版 · v1.3.288",
     "modal_download_btn": "立即下載擴充套件 ZIP (v1.3.288)",
     "modal_step1_title": "步驟 1：下載並解壓",
-    "modal_step1_desc": "點擊上方按鈕下載 <code>pms-extension-latest.zip</code>，並解壓到本地任意文件夾（如 <code>D:\PMS-Extension</code>）。",
+    "modal_step1_desc": "點擊上方按鈕下載 <code>pms-extension-latest.zip</code>，並解壓到本地任意文件夾（如 <code>D:\\PMS-Extension</code>）。",
     "modal_step2_title": "步驟 2：開啟擴充管理並啟用開發者模式",
     "modal_step2_desc": "在 Chrome 或 Edge 網址列輸入 <code>chrome://extensions/</code>，開啟右上角的 <strong>「開發者模式」</strong> 開關。",
     "modal_step3_title": "步驟 3：載入未封裝項目",
@@ -585,7 +585,7 @@ const PMS_TRANSLATIONS = {
     "chrome_badge": "Versión Oficial Directa · v1.3.288",
     "chrome_btn": "Descargar ZIP Fuera de Línea (7.93 MB)",
     "chrome_step1_title": "Paso 1: Descargar y descomprimir",
-    "chrome_step1_desc": "Haga clic arriba para descargar <code>pms-extension-chrome-latest.zip</code> y extráigalo en una carpeta local (ej. <code>D:\PMS-Extension</code>).",
+    "chrome_step1_desc": "Haga clic arriba para descargar <code>pms-extension-chrome-latest.zip</code> y extráigalo en una carpeta local (ej. <code>D:\\PMS-Extension</code>).",
     "chrome_step2_title": "Paso 2: Activar Modo de desarrollador",
     "chrome_step2_desc": "Vaya a <code>chrome://extensions/</code> y active el <strong>Modo de desarrollador</strong> en la esquina superior derecha.",
     "chrome_step3_title": "Paso 3: Cargar extensión descomprimida",
@@ -617,7 +617,7 @@ const PMS_TRANSLATIONS = {
     "modal_download_badge": "Versión Oficial Directa · v1.3.288",
     "modal_download_btn": "Descargar Paquete ZIP (v1.3.288)",
     "modal_step1_title": "Paso 1: Descargar y descomprimir",
-    "modal_step1_desc": "Haga clic en el botón de arriba para descargar <code>pms-extension-latest.zip</code> y extráigalo en una carpeta local (ej. <code>D:\PMS-Extension</code>).",
+    "modal_step1_desc": "Haga clic en el botón de arriba para descargar <code>pms-extension-latest.zip</code> y extráigalo en una carpeta local (ej. <code>D:\\PMS-Extension</code>).",
     "modal_step2_title": "Paso 2: Activar Modo de desarrollador",
     "modal_step2_desc": "Abra su navegador, vaya a <code>chrome://extensions/</code> y active el <strong>Modo de desarrollador</strong> en la esquina superior derecha.",
     "modal_step3_title": "Paso 3: Cargar extensión descomprimida",
@@ -807,7 +807,7 @@ const PMS_TRANSLATIONS = {
     "modal_download_badge": "公式ダイレクト版 · v1.3.288",
     "modal_download_btn": "拡張機能 ZIP をダウンロード (v1.3.288)",
     "modal_step1_title": "ステップ 1：ダウンロードと解凍",
-    "modal_step1_desc": "上のボタンをクリックして <code>pms-extension-latest.zip</code> をダウンロードし、任意のフォルダ（例：<code>D:\PMS-Extension</code>）に解凍します。",
+    "modal_step1_desc": "上のボタンをクリックして <code>pms-extension-latest.zip</code> をダウンロードし、任意のフォルダ（例：<code>D:\\PMS-Extension</code>）に解凍します。",
     "modal_step2_title": "ステップ 2：デベロッパーモードを有効化",
     "modal_step2_desc": "ブラウザのアドレスバーに <code>chrome://extensions/</code> と入力し、右上の<strong>「デベロッパーモード」</strong>をオンにします。",
     "modal_step3_title": "ステップ 3：展開された拡張機能を読み込む",
@@ -965,7 +965,7 @@ const PMS_TRANSLATIONS = {
     "chrome_badge": "공식 다이렉트 배포판 · v1.3.288",
     "chrome_btn": "오프라인 ZIP 다운로드 (7.93 MB)",
     "chrome_step1_title": "1단계: 다운로드 및 압축 해제",
-    "chrome_step1_desc": "위 버튼을 클릭하여 <code>pms-extension-chrome-latest.zip</code> 을 다운로드하고 로컬 폴더(예: <code>D:\PMS-Extension</code>)에 압축을 풉니다.",
+    "chrome_step1_desc": "위 버튼을 클릭하여 <code>pms-extension-chrome-latest.zip</code> 을 다운로드하고 로컬 폴더(예: <code>D:\\PMS-Extension</code>)에 압축을 풉니다.",
     "chrome_step2_title": "2단계: 개발자 모드 켜기",
     "chrome_step2_desc": "Chrome 주소창에 <code>chrome://extensions/</code> 를 입력하고 우측 상단의 <strong>'개발자 모드'</strong>를 켭니다.",
     "chrome_step3_title": "3단계: 압축해제된 확장 프로그램 로드",
@@ -997,7 +997,7 @@ const PMS_TRANSLATIONS = {
     "modal_download_badge": "공식 다이렉트 배포판 · v1.3.288",
     "modal_download_btn": "확장 프로그램 ZIP 다운로드 (v1.3.288)",
     "modal_step1_title": "1단계: 다운로드 및 압축 해제",
-    "modal_step1_desc": "위 버튼을 클릭하여 <code>pms-extension-latest.zip</code> 파일을 다운로드한 뒤 로컬 폴더(예: <code>D:\PMS-Extension</code>)에 압축을 풉니다.",
+    "modal_step1_desc": "위 버튼을 클릭하여 <code>pms-extension-latest.zip</code> 파일을 다운로드한 뒤 로컬 폴더(예: <code>D:\\PMS-Extension</code>)에 압축을 풉니다.",
     "modal_step2_title": "2단계: 개발자 모드 켜기",
     "modal_step2_desc": "Chrome 브라우저 주소창에 <code>chrome://extensions/</code> 를 입력하고 우측 상단의 <strong>'개발자 모드'</strong> 스위치를 켭니다.",
     "modal_step3_title": "3단계: 압축 해제된 확장 프로그램 로드",
@@ -1151,6 +1151,15 @@ const PMS_TRANSLATIONS = {
 /**
  * Switch page language and update all [data-i18n] and [data-i18n-html] elements
  */
+const LANG_SHORT_LABELS = {
+  "zh": "简",
+  "en": "EN",
+  "zh-TW": "繁",
+  "es": "ES",
+  "ja": "日",
+  "ko": "韩"
+};
+
 function setLang(lang) {
   if (!PMS_TRANSLATIONS[lang]) {
     lang = 'en';
@@ -1175,13 +1184,29 @@ function setLang(lang) {
     }
   });
 
-  // 3. Update pill button active states
+  // 3. Update dropdown trigger label & option active states
+  const currentLabel = document.getElementById('current-lang-label');
+  if (currentLabel) {
+    currentLabel.textContent = LANG_SHORT_LABELS[lang] || lang.toUpperCase();
+  }
+
   document.querySelectorAll('.lang-btn').forEach(btn => {
     const btnLang = btn.getAttribute('data-lang');
+    const checkEl = btn.querySelector('.lang-check');
     if (btnLang === lang) {
-      btn.className = "lang-btn px-2 py-0.5 rounded-full bg-white text-emerald-700 font-extrabold shadow-xs transition";
+      if (checkEl) {
+        btn.className = "lang-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-50 text-emerald-700 transition cursor-pointer text-left";
+        checkEl.style.display = "inline";
+      } else {
+        btn.className = "lang-btn px-2 py-0.5 rounded-full bg-white text-emerald-700 font-extrabold shadow-xs transition";
+      }
     } else {
-      btn.className = "lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition";
+      if (checkEl) {
+        btn.className = "lang-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition cursor-pointer text-left";
+        checkEl.style.display = "none";
+      } else {
+        btn.className = "lang-btn px-2 py-0.5 rounded-full text-slate-500 hover:text-slate-900 transition";
+      }
     }
   });
 
@@ -1196,6 +1221,145 @@ function setLang(lang) {
   }
 }
 
+/**
+ * Language Click-to-Dropdown Controller
+ */
+function toggleLangDropdown(e) {
+  if (e) e.stopPropagation();
+  const menu = document.getElementById('lang-dropdown-menu');
+  const btn = document.getElementById('lang-dropdown-btn');
+  const arrow = document.getElementById('lang-dropdown-arrow');
+  if (!menu) return;
+  const isHidden = menu.style.display === 'none' || menu.classList.contains('hidden');
+  if (isHidden) {
+    menu.classList.remove('hidden');
+    menu.style.display = 'block';
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+    if (arrow) arrow.style.transform = 'rotate(180deg)';
+  } else {
+    closeLangDropdown();
+  }
+}
+
+function closeLangDropdown() {
+  const menu = document.getElementById('lang-dropdown-menu');
+  const btn = document.getElementById('lang-dropdown-btn');
+  const arrow = document.getElementById('lang-dropdown-arrow');
+  if (menu) {
+    menu.classList.add('hidden');
+    menu.style.display = 'none';
+  }
+  if (btn) btn.setAttribute('aria-expanded', 'false');
+  if (arrow) arrow.style.transform = 'rotate(0deg)';
+}
+
+function selectLangOption(lang) {
+  setLang(lang);
+  closeLangDropdown();
+}
+
+/**
+ * Sovereign Website Visitor Traffic & IP Telemetry Probe
+ * Automatically resolves visitor public IP + Geo and reports pageview to PMS 24/7 Cloud Relay
+ */
+async function reportWebsiteVisitTelemetry() {
+  try {
+    if (navigator.webdriver) return;
+    const pageName = (window.location.pathname.split('/').pop() || 'index.html').trim() || 'index.html';
+    const sessionVisitKey = 'pms_site_visited_' + pageName;
+    if (sessionStorage.getItem(sessionVisitKey)) return;
+    sessionStorage.setItem(sessionVisitKey, '1');
+
+    // 1. Persistent anonymous visitor device ID
+    let visitorId = localStorage.getItem('pms_site_visitor_id');
+    if (!visitorId) {
+      visitorId = 'WEB-' + Math.random().toString(36).substring(2, 8).toUpperCase() + '-' + Date.now().toString(36).slice(-4).toUpperCase();
+      localStorage.setItem('pms_site_visitor_id', visitorId);
+    }
+
+    // 2. Resolve IP & Geo (cached per session)
+    let ipInfo = null;
+    try {
+      const cached = sessionStorage.getItem('pms_site_visitor_ip_info');
+      if (cached) ipInfo = JSON.parse(cached);
+    } catch (_) {}
+
+    if (!ipInfo || !ipInfo.ip) {
+      try {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 3500);
+        const res = await fetch('https://ipwho.is/', { signal: ctrl.signal });
+        clearTimeout(timer);
+        if (res.ok) {
+          const d = await res.json();
+          if (d && d.ip) {
+            const parts = [d.country, d.region, d.city].filter(Boolean);
+            const isp = (d.connection && (d.connection.isp || d.connection.org)) || '';
+            ipInfo = {
+              ip: d.ip,
+              geo: parts.join(' · ') + (isp ? ' (' + isp + ')' : '')
+            };
+          }
+        }
+      } catch (_) {}
+    }
+
+    if (!ipInfo || !ipInfo.ip) {
+      try {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 3000);
+        const res = await fetch('https://api.ipify.org?format=json', { signal: ctrl.signal });
+        clearTimeout(timer);
+        if (res.ok) {
+          const d = await res.json();
+          const tz = (typeof Intl !== 'undefined' && Intl.DateTimeFormat) ? (Intl.DateTimeFormat().resolvedOptions().timeZone || '') : '';
+          if (d && d.ip) {
+            ipInfo = { ip: d.ip, geo: tz || 'Global' };
+          }
+        }
+      } catch (_) {}
+    }
+
+    if (ipInfo && ipInfo.ip) {
+      try { sessionStorage.setItem('pms_site_visitor_ip_info', JSON.stringify(ipInfo)); } catch (_) {}
+    }
+
+    const ipStr = (ipInfo && ipInfo.ip) ? ipInfo.ip : 'Unknown IP';
+    const geoStr = (ipInfo && ipInfo.geo) ? ipInfo.geo : ((typeof Intl !== 'undefined' && Intl.DateTimeFormat) ? (Intl.DateTimeFormat().resolvedOptions().timeZone || 'Global') : 'Global');
+    const isMobile = /Mobile|Android|iP(hone|od|ad)/i.test(navigator.userAgent || '');
+    const deviceType = isMobile ? 'Mobile' : 'Desktop';
+    const refHost = document.referrer ? (new URL(document.referrer).hostname || 'direct') : 'direct';
+
+    // 3. Report to PMS 24/7 Sovereign GAS Custodian Relay (audit_site_visitor_wizardor_github_io.json)
+    const gasRelayUrl = 'https://script.google.com/macros/s/AKfycbwLccqOD1SOkDjhizZsjOeYWlExl0AJeTKqiUS8W8YphY29zUyNZly54wiYnJHwUeg4yQ/exec';
+    const payload = {
+      secretKey: 'PMS_SECURE_TOKEN_2026_MASTER',
+      action: 'telemetry.audit',
+      payload: {
+        id: 'web_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+        userEmail: 'site_visitor@wizardor.github.io',
+        displayName: '🌐 官网访客 [' + pageName + ' · ' + deviceType + ']',
+        role: 'client',
+        firmId: 'ref:' + refHost,
+        deviceId: visitorId + ' (' + pageName + ')',
+        fingerprintHash: deviceType + '|' + (document.documentElement.lang || 'en'),
+        productCode: 'pms_workbench',
+        eventType: 'PULSE',
+        createdAt: new Date().toISOString(),
+        clientIp: ipStr + ' (' + geoStr + ')'
+      }
+    };
+
+    fetch(gasRelayUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      keepalive: true,
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    }).catch(() => {});
+  } catch (_) {}
+}
+
 // Auto Initialize
 document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -1205,6 +1369,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Default to English for Paddle audits, but honor saved user preference
   const initialLang = langParam || savedLang || 'en';
   setLang(initialLang);
+
+  // Non-blocking visitor traffic & IP telemetry
+  setTimeout(reportWebsiteVisitTelemetry, 300);
 });
 
 /**
@@ -1227,13 +1394,20 @@ function closeDownloadModal() {
 }
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeDownloadModal();
+  if (e.key === 'Escape') {
+    closeDownloadModal();
+    closeLangDropdown();
+  }
 });
 
 document.addEventListener('click', (e) => {
   const modal = document.getElementById('download-modal');
   if (modal && e.target === modal) {
     closeDownloadModal();
+  }
+  const langContainer = document.getElementById('lang-dropdown-container');
+  if (langContainer && !langContainer.contains(e.target)) {
+    closeLangDropdown();
   }
 });
 
