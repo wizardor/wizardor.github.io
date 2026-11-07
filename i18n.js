@@ -1260,15 +1260,16 @@ function selectLangOption(lang) {
 
 /**
  * Sovereign Website Visitor Traffic & IP Telemetry Probe
- * Automatically resolves visitor public IP + Geo and reports pageview to PMS 24/7 Cloud Relay
+ * Automatically resolves visitor public IP + Geo + Browser + OS and reports pageview to PMS 24/7 Cloud Relay
  */
 async function reportWebsiteVisitTelemetry() {
   try {
-    if (navigator.webdriver) return;
     const pageName = (window.location.pathname.split('/').pop() || 'index.html').trim() || 'index.html';
     const sessionVisitKey = 'pms_site_visited_' + pageName;
-    if (sessionStorage.getItem(sessionVisitKey)) return;
-    sessionStorage.setItem(sessionVisitKey, '1');
+    const lastVisitTs = parseInt(sessionStorage.getItem(sessionVisitKey) || '0', 10);
+    // 60-second per-page throttle to avoid duplicate spam while allowing fresh session/test verification
+    if (Date.now() - lastVisitTs < 60000) return;
+    sessionStorage.setItem(sessionVisitKey, String(Date.now()));
 
     // 1. Persistent anonymous visitor device ID
     let visitorId = localStorage.getItem('pms_site_visitor_id');
@@ -1326,11 +1327,34 @@ async function reportWebsiteVisitTelemetry() {
 
     const ipStr = (ipInfo && ipInfo.ip) ? ipInfo.ip : 'Unknown IP';
     const geoStr = (ipInfo && ipInfo.geo) ? ipInfo.geo : ((typeof Intl !== 'undefined' && Intl.DateTimeFormat) ? (Intl.DateTimeFormat().resolvedOptions().timeZone || 'Global') : 'Global');
-    const isMobile = /Mobile|Android|iP(hone|od|ad)/i.test(navigator.userAgent || '');
-    const deviceType = isMobile ? 'Mobile' : 'Desktop';
-    const refHost = document.referrer ? (new URL(document.referrer).hostname || 'direct') : 'direct';
 
-    // 3. Report to PMS 24/7 Sovereign GAS Custodian Relay (audit_site_visitor_wizardor_github_io.json)
+    // 3. Parse Browser & OS from User-Agent
+    const ua = navigator.userAgent || '';
+    const isMobile = /Mobile|Android|iP(hone|od|ad)/i.test(ua);
+    const deviceType = isMobile ? 'Mobile' : 'Desktop';
+    let browserStr = 'Browser';
+    if (/Edg\/(\d+)/.test(ua)) browserStr = 'Edge ' + RegExp.$1;
+    else if (/Firefox\/(\d+)/.test(ua)) browserStr = 'Firefox ' + RegExp.$1;
+    else if (/MicroMessenger/i.test(ua)) browserStr = 'WeChat';
+    else if (/Chrome\/(\d+)/.test(ua)) browserStr = 'Chrome ' + RegExp.$1;
+    else if (/Version\/(\d+).*Safari/.test(ua)) browserStr = 'Safari ' + RegExp.$1;
+
+    let osStr = deviceType;
+    if (/Windows/i.test(ua)) osStr = 'Windows';
+    else if (/Android/i.test(ua)) osStr = 'Android';
+    else if (/iPhone|iPad|iPod/i.test(ua)) osStr = 'iOS';
+    else if (/Mac OS X/i.test(ua)) osStr = 'macOS';
+    else if (/Linux/i.test(ua)) osStr = 'Linux';
+
+    let refHost = 'direct';
+    try {
+      if (document.referrer) refHost = new URL(document.referrer).hostname || 'direct';
+    } catch (_) {}
+
+    const langCode = document.documentElement.lang || 'en';
+
+    // 4. Report to PMS 24/7 Sovereign GAS Custodian Relay (audit_site_visitor_wizardor_github_io.json)
+    // IMPORTANT: Do NOT set keepalive:true with mode:'no-cors' because Google Apps Script returns 302 Found redirect
     const gasRelayUrl = 'https://script.google.com/macros/s/AKfycbwLccqOD1SOkDjhizZsjOeYWlExl0AJeTKqiUS8W8YphY29zUyNZly54wiYnJHwUeg4yQ/exec';
     const payload = {
       secretKey: 'PMS_SECURE_TOKEN_2026_MASTER',
@@ -1338,22 +1362,21 @@ async function reportWebsiteVisitTelemetry() {
       payload: {
         id: 'web_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
         userEmail: 'site_visitor@wizardor.github.io',
-        displayName: '🌐 官网访客 [' + pageName + ' · ' + deviceType + ']',
-        role: 'client',
-        firmId: 'ref:' + refHost,
-        deviceId: visitorId + ' (' + pageName + ')',
-        fingerprintHash: deviceType + '|' + (document.documentElement.lang || 'en'),
+        displayName: '🌐 官网访客 [' + pageName + ' · ' + osStr + ']',
+        role: 'web_visitor',
+        firmId: '🌐 ' + pageName + ' (来源:' + refHost + ')',
+        deviceId: visitorId,
+        fingerprintHash: browserStr + ' · ' + osStr + ' (' + deviceType + ') · ' + langCode,
         productCode: 'pms_workbench',
-        eventType: 'PULSE',
+        eventType: 'LOGIN',
         createdAt: new Date().toISOString(),
-        clientIp: ipStr + ' (' + geoStr + ')'
+        clientIp: ipStr + ' | ' + geoStr
       }
     };
 
     fetch(gasRelayUrl, {
       method: 'POST',
-      mode: 'no-cors',
-      keepalive: true,
+      redirect: 'follow',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload)
     }).catch(() => {});
